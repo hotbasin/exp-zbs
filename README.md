@@ -5,3 +5,4 @@ Backend, DE, DA, ML experiment
 
 1. Python 10+
 2. Django
+3. SQLite

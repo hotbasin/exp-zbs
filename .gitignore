@@ -1,6 +1,6 @@
 __pycache__/
 VENV*/
 venv*/
-*.ipynb
+# *.ipynb
 .ipynb_checkpoints/
 EDA/data/*.xlsx

@@ -4,4 +4,4 @@ venv*/
 # *.ipynb
 .ipynb_checkpoints/
 EDA/data/*.xlsx
-EDA/data/private.csv
+EDA/data/*.csv

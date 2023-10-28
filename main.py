@@ -6,6 +6,7 @@ sys.path.append('VENV\\Lib\\site-packages')
 ###################################################
 
 from fastapi import FastAPI, responses
+import uvicorn
 
 
 ''' =====----- Global variables -----===== '''
@@ -30,7 +31,6 @@ async def server_root() -> str:
 ''' =====----- MAIN -----===== '''
 
 if __name__ == '__main__':
-    import os
-    os.system('uvicorn main:app --reload')
+    uvicorn.run('main:app', port=8080, reload=True)
 
 #####=====----- THE END -----=====#########################################

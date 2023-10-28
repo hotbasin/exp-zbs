@@ -26,4 +26,11 @@ async def server_root() -> str:
     '''
     return responses.FileResponse(ROOT_INDEX_FILE)
 
+
+''' =====----- MAIN -----===== '''
+
+if __name__ == '__main__':
+    import os
+    os.system('uvicorn main:app --reload')
+
 #####=====----- THE END -----=====#########################################

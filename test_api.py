@@ -14,4 +14,8 @@ def test_root() -> str:
     r = requests.get(f'http://{SRV_ADDR}')
     return r.text
 
+
+''' =====----- MAIN -----===== '''
+
+
 #####=====----- THE END -----=====#########################################

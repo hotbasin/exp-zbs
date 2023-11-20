@@ -22,10 +22,11 @@ Backend, DE, DA, ML experiment
 
 ## Задание ##
 
-1. Python 10+
-2. FastAPI
-3. SQLite
-4. PostgreSQL
+1. Переход на Python 10+.
+2. Испольщование на back-end FastAPI, Uvicorn.
+3. Использование SQLite для работы с БД.
+4. Последующий переход на PostgreSQL.
+5. Применение Docker.
 
 [:arrow_up: Содержание](#содержание)
 

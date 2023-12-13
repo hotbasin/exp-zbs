@@ -8,6 +8,8 @@ sys.path.append('VENV/lib/python3.11/site-packages')
 sys.path.append('~/.local/bin')
 #################################################
 
+from os import path
+
 from fastapi import FastAPI, responses
 import uvicorn
 

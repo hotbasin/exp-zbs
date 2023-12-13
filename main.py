@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 
-#####=====----- TEMPORAL for WinDev -----=====#####
+#####=====----- TEMPORAL for VENV -----=====#####
 import sys
-sys.path.append('VENV\\Lib\\site-packages')
-###################################################
+sys.path.append('VENV/Lib/site-packages')
+sys.path.append('VENV/lib/python3.10/site-packages')
+sys.path.append('VENV/lib/python3.11/site-packages')
+sys.path.append('~/.local/bin')
+#################################################
 
 from fastapi import FastAPI, responses
 import uvicorn

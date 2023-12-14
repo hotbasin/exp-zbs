@@ -36,6 +36,7 @@ Backend, DE, DA, ML experiment
 ## TODO ##
 
 - Получить SSL-сертификат.
+- Попробовать работу через Apache в режиме proxy.
 
 ----
 

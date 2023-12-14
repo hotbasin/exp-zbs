@@ -35,6 +35,8 @@ Backend, DE, DA, ML experiment
 
 ## TODO ##
 
+- Получить SSL-сертификат.
+
 ----
 
 ## Решение ##

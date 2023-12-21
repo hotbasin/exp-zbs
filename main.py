@@ -36,6 +36,14 @@ async def server_root() -> str:
 ''' =====----- MAIN -----===== '''
 
 if __name__ == '__main__':
-    uvicorn.run('main:app', port=8080, reload=True)
+    uvicorn.run(
+        'main:app',
+        host='0.0.0.0',
+        port=8080,
+        reload=True,
+        ssl_ca_certs='certs\WF_certificate_ca.crt',
+        ssl_certfile='certs\WF_certificate_x509.crt',
+        ssl_keyfile='certs\WF_private.key'
+    )
 
 #####=====----- THE END -----=====#########################################

@@ -5,5 +5,6 @@ venv*/
 .ipynb_checkpoints/
 EDA/data/*.xlsx
 EDA/data/*.csv
+certs/
 sqlite/sqlite3\.*
 tests/*.csv

@@ -8,7 +8,7 @@ import requests
 ''' =====----- Global variables -----===== '''
 
 # IP-адрес/FQDN и порт тестируемого сервера
-SRV_ADDR = '127.0.0.1:7077'
+SRV_ADDR = '127.0.0.1:8080'
 # SRV_ADDR = 'zonest.ssszone.ru:7077'
 
 
@@ -16,7 +16,7 @@ SRV_ADDR = '127.0.0.1:7077'
 
 # Проверка / и /index
 def test_index(path_: str='') -> str:
-    response_ = requests.get(f'http://{SRV_ADDR}' + path_)
+    response_ = requests.get(f'https://{SRV_ADDR}' + path_)
     return response_.text
 
 
@@ -63,7 +63,7 @@ def test_txt_upload_post(sample_file: str) -> str:
 
 if __name__ == '__main__':
     #####=====----- Тест / -----=====#####
-    # print(test_index('/'))
+    print(test_index('/'))
 
     #####=====----- Тест login -----=====#####
     # creds = {'login': 'user1', 'password': 'qwerty1'}
@@ -71,7 +71,7 @@ if __name__ == '__main__':
     # print(test_login_get(creds))
 
     #####=====----- Тест random_data -----=====#####
-    print(test_random_get())
+    # print(test_random_get())
 
     #####=====----- Тест upload -----=====#####
     # print(test_bin_upload_post('test_file.csv'))

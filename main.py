@@ -18,12 +18,12 @@ import uvicorn
 
 # Корневой index.html
 ROOT_INDEX_FILE = 'static/index.html'
-app = FastAPI()
+srv = FastAPI()
 
 
 ''' =====----- Endpoints -----===== '''
 
-@app.get('/')
+@srv.get('/')
 async def server_root() -> str:
     ''' Аналог index.html в ServerRoot для начальной страницы FastAPI
     Returns:
@@ -37,9 +37,9 @@ async def server_root() -> str:
 
 if __name__ == '__main__':
     uvicorn.run(
-        'main:app',
+        'main:srv',
         host='0.0.0.0',
-        port=8080,
+        port=7077,
         reload=True,
         ssl_ca_certs='certs/ca_certificate.crt',
         ssl_certfile='certs/certificate.crt',

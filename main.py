@@ -13,6 +13,7 @@ from os import path
 from fastapi import FastAPI, responses
 import uvicorn
 
+import srv_api as api_
 
 ''' =====----- Global variables -----===== '''
 

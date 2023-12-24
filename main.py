@@ -54,6 +54,11 @@ async def random_data_get() -> str:
     return responses.ORJSONResponse(api_.random_data_get())
 
 
+@srv.post('/srv1/auth/login')
+async def login_post(credentials: Credentials):
+    pass
+
+
 ''' =====----- MAIN -----===== '''
 
 if __name__ == '__main__':

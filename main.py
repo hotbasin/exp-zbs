@@ -11,15 +11,17 @@ sys.path.append('~/.local/bin')
 from os import path
 
 from fastapi import FastAPI, responses
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 import srv_api as api_
 
+
 ''' =====----- Global variables -----===== '''
 
+srv = FastAPI()
 # Корневой index.html
 ROOT_INDEX_FILE = 'static/index.html'
-srv = FastAPI()
 
 
 ''' =====----- Endpoints -----===== '''

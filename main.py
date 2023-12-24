@@ -20,6 +20,13 @@ import srv_api as api_
 ''' =====----- Global variables -----===== '''
 
 srv = FastAPI()
+srv.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=['*'],
+    allow_methods=['*'],
+    allow_headers=['*']
+)
 # Корневой index.html
 ROOT_INDEX_FILE = 'static/index.html'
 

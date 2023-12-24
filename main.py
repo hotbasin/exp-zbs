@@ -43,6 +43,11 @@ async def server_root() -> str:
     return responses.FileResponse(ROOT_INDEX_FILE)
 
 
+@srv.get('/random_data')
+async def random_data_get() -> str:
+    return responses.ORJSONResponse(api_.random_data_get())
+
+
 ''' =====----- MAIN -----===== '''
 
 if __name__ == '__main__':

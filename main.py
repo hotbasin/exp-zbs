@@ -12,6 +12,7 @@ from os import path
 
 from fastapi import FastAPI, responses
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 import uvicorn
 
 import srv_api as api_
@@ -29,6 +30,13 @@ srv.add_middleware(
 )
 # Корневой index.html
 ROOT_INDEX_FILE = 'static/index.html'
+
+
+''' =====----- Classes -----===== '''
+
+class Credentials(BaseModel):
+    login: str
+    password: str
 
 
 ''' =====----- Endpoints -----===== '''

@@ -64,6 +64,8 @@ async def random_data_get() -> str:
 
 @srv.post('/srv1/auth/login')
 async def login_post(credentials: Credentials):
+    ''' Аутентификация на сервере
+    '''
     return responses.ORJSONResponse(api_.login_getpost(dict(credentials)))
 
 

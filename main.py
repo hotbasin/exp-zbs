@@ -29,7 +29,8 @@ srv.add_middleware(
     allow_headers=['*']
 )
 # Корневой index.html
-ROOT_INDEX_FILE = 'static/index.html'
+ROOT_INDEX_FILE = path.join(path.dirname(path.abspath(__file__)),
+                            'static/index.html')
 
 
 ''' =====----- Classes -----===== '''

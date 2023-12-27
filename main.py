@@ -72,7 +72,8 @@ async def login_post(credentials: Credentials):
 
 @srv.post('/srv1/model/ini_bin_upload')
 async def bin_upload_post(file: UploadFile):
-    pass
+    with open('tests/binary_file.csv', 'wb') as wb_:
+        wb_.write(file.file.read())
 
 
 ''' =====----- MAIN -----===== '''

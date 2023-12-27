@@ -10,7 +10,7 @@ sys.path.append('~/.local/bin')
 
 from os import path
 
-from fastapi import FastAPI, responses
+from fastapi import FastAPI, responses, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
@@ -68,6 +68,11 @@ async def login_post(credentials: Credentials):
     ''' Аутентификация на сервере
     '''
     return responses.ORJSONResponse(api_.login_getpost(dict(credentials)))
+
+
+@srv.post('/srv1/model/ini_bin_upload')
+async def bin_upload_post(file: UploadFile):
+    pass
 
 
 ''' =====----- MAIN -----===== '''

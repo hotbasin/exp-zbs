@@ -74,6 +74,9 @@ async def login_post(credentials: Credentials):
 async def bin_upload_post(file: UploadFile):
     with open('tests/binary_file.csv', 'wb') as wb_:
         wb_.write(file.file.read())
+    return responses.JSONResponse({'filename': file.filename,
+                                   'size': file.size,
+                                   'text': 'Binary file loaded'})
 
 
 ''' =====----- MAIN -----===== '''

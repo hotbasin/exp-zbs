@@ -51,7 +51,43 @@ class File(Base):
 
 ''' =====----- API Methods -----===== '''
 
-def login_getpost(credentials: dict) -> dict:
+def get_random_data():
+    ''' Для отладки взаимодействия с frontend.
+    Отдаёт json (список словарей) со случайными значениями [float] в
+    интервале [0, 1] по неким именам.
+    Returns:
+        [json] -- Список словарей
+    '''
+    output_list_ = []
+    name_list_ = [
+        'William', 'Shatner', 'Kirk', 'Leonard', 'Nimoy',
+        'Spock', 'DeForest', 'Kelley', 'McCoy', 'James',
+        'Doohan', 'Scott', 'Nichelle', 'Nichols', 'Uhura',
+        'Walter', 'Koenig', 'Chekov', 'George', 'Takei',
+        'Sulu', 'Picard', 'Riker', 'LaForge', 'Yar',
+        'Worf', 'Crusher', 'Troi', 'Data', 'Wesley'
+        ]
+    for i_ in range(0, 3):
+        output_list_.append({'name': choice(name_list_), 'prob': round(random(), 2)})
+    return output_list_
+
+
+def get_datafile() -> dict:
+    ''' Выдаёт атрибуты последнего удачно загруженного файла с данными
+    Returns:
+        [dict] -- словарь/json с ключами 'filename': (str),
+            'filesize': (int), 'loaddate': (float)
+    '''
+    output_dict_ = dict()
+    with Session(ENGINE) as s_:
+        filedata_ = s_.query(File).first()
+    output_dict_['filename'] = filedata_.filename
+    output_dict_['filesize'] = filedata_.filesize
+    output_dict_['loaddate'] = filedata_.loaddate
+    return output_dict_
+
+
+def post_login(credentials: dict) -> dict:
     ''' Метод для аутентификации на сервере. При логине пользователя
     записывает ему в таблицу "Users" выданные access-token и refresh-token
     и время окончания их действия "acc_expired" и "ref_expired".
@@ -96,27 +132,6 @@ def login_getpost(credentials: dict) -> dict:
         print(e_)
     # return json.dumps(output_dict_, ensure_ascii=False, indent=2)
     return output_dict_
-
-
-def random_data_get():
-    ''' Для отладки взаимодействия с frontend.
-    Отдаёт json (список словарей) со случайными значениями [float] в
-    интервале [0, 1] по неким именам.
-    Returns:
-        [json] -- Список словарей
-    '''
-    output_list_ = []
-    name_list_ = [
-        'William', 'Shatner', 'Kirk', 'Leonard', 'Nimoy',
-        'Spock', 'DeForest', 'Kelley', 'McCoy', 'James',
-        'Doohan', 'Scott', 'Nichelle', 'Nichols', 'Uhura',
-        'Walter', 'Koenig', 'Chekov', 'George', 'Takei',
-        'Sulu', 'Picard', 'Riker', 'LaForge', 'Yar',
-        'Worf', 'Crusher', 'Troi', 'Data', 'Wesley'
-        ]
-    for i_ in range(0, 3):
-        output_list_.append({'name': choice(name_list_), 'prob': round(random(), 2)})
-    return output_list_
 
 
 def update_last_file_data(filename: str, filesize: int, loaddate: float):

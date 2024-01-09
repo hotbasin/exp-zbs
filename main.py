@@ -55,25 +55,34 @@ async def server_root() -> str:
 
 
 @srv.get('/random_data')
-async def random_data_get() -> str:
+async def get_random_data() -> str:
     ''' Для отладки взаимодействия с frontend.
     Отдаёт json (список словарей) со случайными значениями [float] в
     интервале [0, 1] по неким именам.
     Returns:
         [json] -- Список словарей
     '''
-    return responses.ORJSONResponse(api_.random_data_get())
+    return responses.ORJSONResponse(api_.get_random_data())
+
+
+@srv.get('/data-file')
+async def get_datafile():
+    ''' Выдаёт атрибуты последнего удачно загруженного файла с данными
+    Returns:
+        [json] -- словарь/json с ключами 'filename', 'filesize', 'loaddate'
+    '''
+    return responses.ORJSONResponse(api_.get_datafile())
 
 
 @srv.post('/srv1/auth/login')
-async def login_post(credentials: Credentials):
+async def post_login(credentials: Credentials):
     ''' Аутентификация на сервере
     '''
-    return responses.ORJSONResponse(api_.login_getpost(dict(credentials)))
+    return responses.ORJSONResponse(api_.post_login(dict(credentials)))
 
 
 @srv.post('/srv1/model/ini_bin_upload')
-async def bin_upload_post(file: UploadFile):
+async def post_bin_upload(file: UploadFile):
     with open(TMP_CSV_FILE, 'wb') as wb_:
         wb_.write(file.file.read())
     filename_ = file.filename

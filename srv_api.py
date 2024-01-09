@@ -41,6 +41,13 @@ class User(Base):
     ref_expired = sa.Column(sa.Float)
     comment = sa.Column(sa.Text(1024))
 
+class File(Base):
+    __tablename__ = 'File'
+    id = sa.Column(sa.Integer, primary_key=True)
+    filename = sa.Column(sa.String(1024))
+    filesize = sa.Column(sa.Integer)
+    loaddate = sa.Column(sa.Float)
+
 
 ''' =====----- API Methods -----===== '''
 
@@ -110,5 +117,15 @@ def random_data_get():
     for i_ in range(0, 3):
         output_list_.append({'name': choice(name_list_), 'prob': round(random(), 2)})
     return output_list_
+
+
+def update_last_file_data(filename: str, filesize: int, loaddate: float):
+    with Session(ENGINE) as s_:
+        filedata_ = s_.query(File).first()
+        filedata_.filename = filename
+        filedata_.filesize = filesize
+        filedata_.loaddate = loaddate
+        s_.add(filedata_)
+        s_.commit()
 
 #####=====----- THE END -----=====#########################################

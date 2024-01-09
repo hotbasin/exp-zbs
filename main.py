@@ -9,6 +9,7 @@ sys.path.append('~/.local/bin')
 #################################################
 
 from os import path
+from time import time
 
 from fastapi import FastAPI, responses, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -31,6 +32,7 @@ srv.add_middleware(
 # Корневой index.html
 ROOT_INDEX_FILE = path.join(path.dirname(path.abspath(__file__)),
                             'static/index.html')
+TMP_CSV_FILE = 'tests/binary_file.csv'
 
 
 ''' =====----- Classes -----===== '''
@@ -55,8 +57,8 @@ async def server_root() -> str:
 @srv.get('/random_data')
 async def random_data_get() -> str:
     ''' Для отладки взаимодействия с frontend.
-        Отдаёт json (список словарей) со случайными значениями [float] в
-        интервале [0, 1] по неким именам.
+    Отдаёт json (список словарей) со случайными значениями [float] в
+    интервале [0, 1] по неким именам.
     Returns:
         [json] -- Список словарей
     '''
@@ -72,11 +74,16 @@ async def login_post(credentials: Credentials):
 
 @srv.post('/srv1/model/ini_bin_upload')
 async def bin_upload_post(file: UploadFile):
-    with open('tests/binary_file.csv', 'wb') as wb_:
+    with open(TMP_CSV_FILE, 'wb') as wb_:
         wb_.write(file.file.read())
-    return responses.JSONResponse({'filename': file.filename,
-                                   'size': file.size,
-                                   'text': 'Binary file loaded'})
+    filename_ = file.filename
+    filesize_ = file.size
+    loaddate_ = time()
+    api_.update_last_file_data(filename_, filesize_, loaddate_)
+    return responses.JSONResponse({'status': 'File accepted',
+                                   'filename': filename_,
+                                   'filesize': filesize_,
+                                   'loaddate': loaddate_})
 
 
 ''' =====----- MAIN -----===== '''

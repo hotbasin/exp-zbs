@@ -24,7 +24,7 @@ srv = FastAPI()
 srv.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
-    allow_credentials=['*'],
+    allow_credentials=True,
     allow_methods=['*'],
     allow_headers=['*']
 )
@@ -87,9 +87,9 @@ if __name__ == '__main__':
         host='0.0.0.0',
         port=7077,
         reload=True,
-        ssl_ca_certs='certs/ca_certificate.crt',
-        ssl_certfile='certs/certificate.crt',
-        ssl_keyfile='certs/private.key'
+        # ssl_ca_certs='certs/ca_certificate.crt',
+        # ssl_certfile='certs/certificate.crt',
+        # ssl_keyfile='certs/private.key'
     )
 
 #####=====----- THE END -----=====#########################################

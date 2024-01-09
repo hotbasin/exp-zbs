@@ -3,8 +3,9 @@ VENV*/
 venv*/
 # *.ipynb
 .ipynb_checkpoints/
-EDA/data/*.xlsx
-EDA/data/*.csv
+EDA/data/*\.xlsx
+EDA/data/*\.csv
 certs/
 sqlite/sqlite3\.*
-tests/*.csv
+tests/*\.csv
+tests/*\.json

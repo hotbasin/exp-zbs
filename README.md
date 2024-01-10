@@ -44,8 +44,10 @@ Backend, DE, DA, ML experiment
 
 ## DONE ##
 
+- Метод GET **`/random_data`
 - Метод POST **`/srv1/auth/login`**`
-- SSL-сертификат от Let;s Encrypt. Установка `certbot`.
+- Метод POST **`/srv1/model/ini_bin_download`
+- SSL-сертификат от Let;s Encrypt. Установка `certbot`
 
 ----
 

@@ -87,6 +87,16 @@ def get_datafile() -> dict:
     return output_dict_
 
 
+def update_last_file_data(filename: str, filesize: int, loaddate: float):
+    with Session(ENGINE) as s_:
+        filedata_ = s_.query(File).first()
+        filedata_.filename = filename
+        filedata_.filesize = filesize
+        filedata_.loaddate = loaddate
+        s_.add(filedata_)
+        s_.commit()
+
+
 def post_login(credentials: dict) -> dict:
     ''' Метод для аутентификации на сервере. При логине пользователя
     записывает ему в таблицу "Users" выданные access-token и refresh-token
@@ -132,15 +142,5 @@ def post_login(credentials: dict) -> dict:
         print(e_)
     # return json.dumps(output_dict_, ensure_ascii=False, indent=2)
     return output_dict_
-
-
-def update_last_file_data(filename: str, filesize: int, loaddate: float):
-    with Session(ENGINE) as s_:
-        filedata_ = s_.query(File).first()
-        filedata_.filename = filename
-        filedata_.filesize = filesize
-        filedata_.loaddate = loaddate
-        s_.add(filedata_)
-        s_.commit()
 
 #####=====----- THE END -----=====#########################################

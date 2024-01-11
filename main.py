@@ -74,13 +74,6 @@ async def get_datafile():
     return responses.ORJSONResponse(api_.get_datafile())
 
 
-@srv.post('/srv1/auth/login')
-async def post_login(credentials: Credentials):
-    ''' Аутентификация на сервере
-    '''
-    return responses.ORJSONResponse(api_.post_login(dict(credentials)))
-
-
 @srv.post('/srv1/model/ini_bin_upload')
 async def post_bin_upload(file: UploadFile):
     with open(TMP_CSV_FILE, 'wb') as wb_:
@@ -93,6 +86,13 @@ async def post_bin_upload(file: UploadFile):
                                    'filename': filename_,
                                    'filesize': filesize_,
                                    'loaddate': loaddate_})
+
+
+@srv.post('/srv1/auth/login')
+async def post_login(credentials: Credentials):
+    ''' Аутентификация на сервере
+    '''
+    return responses.ORJSONResponse(api_.post_login(dict(credentials)))
 
 
 ''' =====----- MAIN -----===== '''

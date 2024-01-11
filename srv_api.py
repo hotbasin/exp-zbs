@@ -95,19 +95,6 @@ def get_random_data():
     return output_list_
 
 
-def get_predictions():
-    ''' Выдает список предсказанных вероятностей поимённо
-    Returns:
-        [json] -- Список словарей
-    '''
-    output_list_ = []
-    with Session(MODEL_ENGINE) as t_:
-        all_predictions = t_.query(Model_Base).all()
-    for student in all_predictions:
-        output_list_.append({'name': student.tg_id, 'prob': student.prediction})
-    return output_list_
-
-
 def get_datafile() -> dict:
     ''' Выдаёт атрибуты последнего удачно загруженного файла с данными
     Returns:
@@ -131,6 +118,19 @@ def update_last_file_data(filename: str, filesize: int, loaddate: float):
         filedata_.loaddate = loaddate
         s_.add(filedata_)
         s_.commit()
+
+
+def get_predictions():
+    ''' Выдает список предсказанных вероятностей поимённо
+    Returns:
+        [json] -- Список словарей
+    '''
+    output_list_ = []
+    with Session(MODEL_ENGINE) as t_:
+        all_predictions = t_.query(Model_Base).all()
+    for student in all_predictions:
+        output_list_.append({'name': student.tg_id, 'prob': student.prediction})
+    return output_list_
 
 
 def post_login(credentials: dict) -> dict:

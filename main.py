@@ -88,7 +88,7 @@ async def post_bin_upload(file: UploadFile):
                                    'loaddate': loaddate_})
 
 
-@srv.get('predictions')
+@srv.get('/predictions')
 async def get_predictions() -> str:
     ''' Выдает список предсказанных вероятностей поимённо
     Returns:

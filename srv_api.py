@@ -20,6 +20,10 @@ from sqlalchemy.orm import declarative_base, Session
 DB_PATH = 'sqlite:///sqlite/users.sqlite3'
 Base = declarative_base()
 ENGINE = sa.create_engine(DB_PATH)
+# Временная база для модели
+MODEL_DB_PATH = 'sqlite:///sqlite/model2.sqlite3'
+ModelBase = declarative_base()
+MODEL_ENGINE = sa.create_engine(MODEL_DB_PATH)
 # Время жизни access-token
 ACC_TTL = 600.0
 # Время жизни refresh-token
@@ -48,6 +52,25 @@ class File(Base):
     filesize = sa.Column(sa.Integer)
     loaddate = sa.Column(sa.Float)
 
+class Model_Base(ModelBase):
+    __tablename__ = 'Students'
+    uid = sa.Column(sa.Integer(), nullable=False, unique=True, primary_key=True, autoincrement=True)
+    date = sa.Column(sa.String())
+    tg_id = sa.Column(sa.Text())
+    timezone = sa.Column(sa.String())
+    stack = sa.Column(sa.Text())
+    occupation = sa.Column(sa.Text())
+    role = sa.Column(sa.Text())
+    project_role = sa.Column(sa.Text())
+    weekload = sa.Column(sa.Text())
+    course = sa.Column(sa.Text())
+    course_time = sa.Column(sa.Text())
+    notes = sa.Column(sa.Text())
+    pl = sa.Column(sa.String())
+    chat = sa.Column(sa.String())
+    exited = sa.Column(sa.Text())
+    prediction = sa.Column(sa.Float())
+
 
 ''' =====----- API Methods -----===== '''
 
@@ -69,6 +92,19 @@ def get_random_data():
         ]
     for i_ in range(0, 3):
         output_list_.append({'name': choice(name_list_), 'prob': round(random(), 2)})
+    return output_list_
+
+
+def get_predictions():
+    ''' Выдает список предсказанных вероятностей поимённо
+    Returns:
+        [json] -- Список словарей
+    '''
+    output_list_ = []
+    with Session(MODEL_ENGINE) as t_:
+        all_predictions = t_.query(Model_Base).all()
+    for student in all_predictions:
+        output_list_.append({'name': student.tg_id, 'prob': student.prediction})
     return output_list_
 
 

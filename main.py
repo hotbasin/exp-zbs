@@ -88,6 +88,15 @@ async def post_bin_upload(file: UploadFile):
                                    'loaddate': loaddate_})
 
 
+@srv.get('predictions')
+async def get_predictions() -> str:
+    ''' Выдает список предсказанных вероятностей поимённо
+    Returns:
+        [json] -- Список словарей
+    '''
+    return responses.ORJSONResponse(api_.get_predictions())
+
+
 @srv.post('/srv1/auth/login')
 async def post_login(credentials: Credentials):
     ''' Аутентификация на сервере

@@ -129,7 +129,10 @@ def get_predictions():
     with Session(MODEL_ENGINE) as t_:
         all_predictions = t_.query(Model_Base).all()
     for student in all_predictions:
-        output_list_.append({'name': student.tg_id, 'prob': student.prediction})
+        output_list_.append({'tg_id': student.tg_id,
+                             'project_role': student.project_role,
+                             'prediction': student.prediction
+                           })
     return output_list_
 
 

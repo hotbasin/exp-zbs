@@ -34,10 +34,14 @@ srv.add_middleware(
 ROOT_INDEX_FILE = path.join(path.dirname(path.abspath(__file__)),
                             'static/index.html')
 TMP_CSV_FILE = 'tests/binary_file.csv'
+# IP или FQDN сервера, на котором работает приложение
+HOST = '0.0.0.0'
+# TCP-порт, на котором работает прилржение
+PORT=7077
 # Файлы сертификатов для SSL/TLS
-ROOT_CERT = 'certs/ca_certificate.crt'
-HOST_CERT = 'certs/certificate.crt'
-PRIV_CERT = 'certs/private.key'
+ROOT_CERT_FILE = 'certs/ca_certificate.crt'
+HOST_CERT_FILE = 'certs/certificate.crt'
+PRIV_CERT_FILE = 'certs/private.key'
 
 
 ''' =====----- Classes -----===== '''
@@ -112,23 +116,23 @@ async def post_login(credentials: Credentials):
 ''' =====----- MAIN -----===== '''
 
 if __name__ == '__main__':
-    if Path(ROOT_CERT).exists() and \
-        Path(HOST_CERT).exists() and \
-        Path(PRIV_CERT).exists():
+    if Path(ROOT_CERT_FILE).exists() and \
+       Path(HOST_CERT_FILE).exists() and \
+       Path(PRIV_CERT_FILE).exists():
         uvicorn.run(
             'main:srv',
-            host='0.0.0.0',
-            port=7077,
+            host=HOST,
+            port=PORT,
             reload=True,
-            ssl_ca_certs=ROOT_CERT,
-            ssl_certfile=HOST_CERT,
-            ssl_keyfile=PRIV_CERT
+            ssl_ca_certs=ROOT_CERT_FILE,
+            ssl_certfile=HOST_CERT_FILE,
+            ssl_keyfile=PRIV_CERT_FILE
         )
     else:
         uvicorn.run(
             'main:srv',
-            host='0.0.0.0',
-            port=7077,
+            host=HOST,
+            port=PORT,
             reload=True
         )
 

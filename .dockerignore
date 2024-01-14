@@ -1,0 +1,8 @@
+__pycache__/
+VENV*/
+venv*/
+*.ipynb
+.ipynb_checkpoints/
+BACK/
+EDA/
+sqlite/

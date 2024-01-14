@@ -9,6 +9,7 @@ sys.path.append('~/.local/bin')
 #################################################
 
 from os import path
+from pathlib import Path
 from time import time
 
 from fastapi import FastAPI, responses, File, UploadFile
@@ -33,6 +34,10 @@ srv.add_middleware(
 ROOT_INDEX_FILE = path.join(path.dirname(path.abspath(__file__)),
                             'static/index.html')
 TMP_CSV_FILE = 'tests/binary_file.csv'
+# Файлы сертификатов для SSL/TLS
+ROOT_CERT = 'certs/ca_certificate.crt'
+HOST_CERT = 'certs/certificate.crt'
+PRIV_CERT = 'certs/private.key'
 
 
 ''' =====----- Classes -----===== '''
@@ -107,14 +112,24 @@ async def post_login(credentials: Credentials):
 ''' =====----- MAIN -----===== '''
 
 if __name__ == '__main__':
-    uvicorn.run(
-        'main:srv',
-        host='0.0.0.0',
-        port=7077,
-        reload=True,
-        # ssl_ca_certs='certs/ca_certificate.crt',
-        # ssl_certfile='certs/certificate.crt',
-        # ssl_keyfile='certs/private.key'
-    )
+    if Path(ROOT_CERT).exists() and \
+        Path(HOST_CERT).exists() and \
+        Path(PRIV_CERT).exists():
+        uvicorn.run(
+            'main:srv',
+            host='0.0.0.0',
+            port=7077,
+            reload=True,
+            ssl_ca_certs=ROOT_CERT,
+            ssl_certfile=HOST_CERT,
+            ssl_keyfile=PRIV_CERT
+        )
+    else:
+        uvicorn.run(
+            'main:srv',
+            host='0.0.0.0',
+            port=7077,
+            reload=True
+        )
 
 #####=====----- THE END -----=====#########################################

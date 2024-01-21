@@ -39,6 +39,7 @@ Backend, DE, DA, ML experiment
 - Метод GET **`/data-file`**
 - Метод GET **`/predictions`**
 - Метод POST **`/data-file`**
+- Восстановление работы
 
 ----
 

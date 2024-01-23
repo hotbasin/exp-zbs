@@ -6,7 +6,7 @@ venv*/
 EDA/data/*\.xlsx
 EDA/data/*\.csv
 EDA/*\.sqlite3
-certs/
+##### certs/
 sqlite/sqlite3\.*
 tests/*\.csv
 tests/*\.json

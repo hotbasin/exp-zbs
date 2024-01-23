@@ -11,7 +11,7 @@ ENV PATH /usr/local/bin:$PATH
 # COPY ./BACK /BACKEND
 COPY . /BACKEND
 
-ADD "certs" "/BACKEND/"
+##### ADD "./certs" "/BACKEND/certs"
 
 STOPSIGNAL SIGTERM
 EXPOSE 7077

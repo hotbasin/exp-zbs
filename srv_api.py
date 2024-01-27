@@ -160,24 +160,22 @@ def post_login(credentials: dict) -> dict:
             user_ = s_.query(User).filter(User.login == login_).first()
             if user_:
                 if user_.password == password_:
-                    acc_token_ = str(uuid.uuid4())
-                    ref_token_ = str(uuid.uuid4())
                     # Обновление пользователя в базе
-                    user_.acc_token = acc_token_
-                    user_.ref_token = ref_token_
+                    user_.acc_token = str(uuid.uuid4())
+                    user_.ref_token = str(uuid.uuid4())
                     user_.acc_expired = time() + ACC_TTL
                     user_.ref_expired = time() + REF_TTL
                     s_.add(user_)
                     s_.commit()
                     # Формирование ответа
                     output_dict_['status'] = 'success'
-                    output_dict_['text'] = f'User {login_}: logged in'
-                    output_dict_['acc_token'] = acc_token_
+                    output_dict_['text'] = f'User {user_.login}: logged in'
+                    output_dict_['acc_token'] = user_.acc_token
                     output_dict_['acc_expired'] = user_.acc_expired
-                    output_dict_['ref_token'] = ref_token_
+                    output_dict_['ref_token'] = user_.ref_token
                     output_dict_['ref_expired'] = user_.ref_expired
                 else:
-                    output_dict_['text'] = f'User {login_}: login failed'
+                    output_dict_['text'] = f'User {user_.login}: login failed'
             else:
                 output_dict_['text'] = f'User {login_}: not exists'
     except Exception as e_:
@@ -198,8 +196,6 @@ def post_refresh_token(refresh_access: dict) -> dict:
             user_ = s_.query(User).filter(User.ref_token == ref_token_).first()
             if user_:
                 if user_.ref_expired > time():
-                    ##### acc_token_ = str(uuid.uuid4())
-                    ##### acc_expired_ = time() + ACC_TTL
                     # Обновление токена пользователя в базе
                     user_.acc_token = str(uuid.uuid4())
                     user_.acc_expired = time() + ACC_TTL

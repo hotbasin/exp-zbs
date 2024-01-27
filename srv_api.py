@@ -21,7 +21,7 @@ DB_PATH = 'sqlite:///sqlite/users.sqlite3'
 Base = declarative_base()
 ENGINE = sa.create_engine(DB_PATH)
 # Временная база для модели
-MODEL_DB_PATH = 'sqlite:///sqlite/model2.sqlite3'
+MODEL_DB_PATH = 'sqlite:///sqlite/model3.sqlite3'
 ModelBase = declarative_base()
 MODEL_ENGINE = sa.create_engine(MODEL_DB_PATH)
 # Время жизни access-token
@@ -54,22 +54,24 @@ class File(Base):
 
 class Model_Base(ModelBase):
     __tablename__ = 'Students'
-    uid = sa.Column(sa.Integer(), nullable=False, unique=True, primary_key=True, autoincrement=True)
+    p_key = sa.Column(sa.Integer(), nullable=False, unique=True, primary_key=True, autoincrement=True)
     date = sa.Column(sa.String())
-    tg_id = sa.Column(sa.Text())
-    timezone = sa.Column(sa.String())
-    stack = sa.Column(sa.Text())
-    occupation = sa.Column(sa.Text())
+    id = sa.Column(sa.Text())
+    utc = sa.Column(sa.String())
+    steck = sa.Column(sa.Text())
+    spec = sa.Column(sa.Text())
     role = sa.Column(sa.Text())
-    project_role = sa.Column(sa.Text())
-    weekload = sa.Column(sa.Text())
-    course = sa.Column(sa.Text())
-    course_time = sa.Column(sa.Text())
+    role_in = sa.Column(sa.Text())
+    hour_per_week = sa.Column(sa.Text())
+    other_courses = sa.Column(sa.Text())
+    time_of_studies = sa.Column(sa.Text())
     notes = sa.Column(sa.Text())
-    pl = sa.Column(sa.String())
-    chat = sa.Column(sa.String())
-    exited = sa.Column(sa.Text())
+    language = sa.Column(sa.String())
+    in_chat = sa.Column(sa.String())
+    out = sa.Column(sa.Text())
     prediction = sa.Column(sa.Float())
+
+Base.metadata.create_all(MODEL_ENGINE)
 
 
 ''' =====----- API Methods -----===== '''

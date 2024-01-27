@@ -21,5 +21,5 @@ CREATE TABLE "File"     (
                         "filesize" INTEGER DEFAULT NULL,
                         "loaddate" REAL DEFAULT NULL
                         );
-INSERT INTO "File" VALUES(1,NULL,NULL,NULL);
+INSERT INTO "File" VALUES(1,'nofile.csv',0,0);
 COMMIT;

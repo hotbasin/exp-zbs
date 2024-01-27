@@ -185,4 +185,23 @@ def post_login(credentials: dict) -> dict:
     # return json.dumps(output_dict_, ensure_ascii=False, indent=2)
     return output_dict_
 
+
+def post_refresh_token(refresh_access: dict) -> dict:
+    '''
+    '''
+    output_dict_ = {'status': 'fail',
+                    'text': 'Unknown refresh-token'
+                   }
+    try:
+        with Session(ENGINE) as s_:
+            ref_token_ = refresh_access['ref_token']
+            user_ = s_.query(User).filter(User.ref_token == ref_token_).first()
+            if user_:
+                pass
+            else:
+                pass
+    except:
+        pass
+    return output_dict_
+
 #####=====----- THE END -----=====#########################################

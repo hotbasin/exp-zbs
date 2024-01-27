@@ -51,6 +51,10 @@ class Credentials(BaseModel):
     password: str
 
 
+class RefreshToken(BaseModel):
+    ref_token: str
+
+
 ''' =====----- Endpoints -----===== '''
 
 @srv.get('/')
@@ -111,6 +115,13 @@ async def post_login(credentials: Credentials):
     ''' Аутентификация на сервере
     '''
     return responses.ORJSONResponse(api_.post_login(dict(credentials)))
+
+
+@srv.post('/srv1/auth/refresh')
+async def post_refresh_token(refresh_access: RefreshToken):
+    ''' Обновление access-token через refresh-token
+    '''
+    return responses.ORJSONResponse(api_.post_refresh_token(dict(refresh_access)))
 
 
 ''' =====----- MAIN -----===== '''

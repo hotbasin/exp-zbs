@@ -190,18 +190,32 @@ def post_refresh_token(refresh_access: dict) -> dict:
     '''
     '''
     output_dict_ = {'status': 'fail',
-                    'text': 'Unknown refresh-token'
+                    'text': 'Unknown request'
                    }
     try:
         with Session(ENGINE) as s_:
             ref_token_ = refresh_access['ref_token']
             user_ = s_.query(User).filter(User.ref_token == ref_token_).first()
             if user_:
-                pass
+                if user_.ref_expired > time():
+                    ##### acc_token_ = str(uuid.uuid4())
+                    ##### acc_expired_ = time() + ACC_TTL
+                    # Обновление токена пользователя в базе
+                    user_.acc_token = str(uuid.uuid4())
+                    user_.acc_expired = time() + ACC_TTL
+                    s_.add(user_)
+                    s_.commit()
+                    # Формирование ответа
+                    output_dict_['status'] = 'success'
+                    output_dict_['text'] = f'User {user_.login}: new access-token generated'
+                    output_dict_['acc_token'] = user_.acc_token
+                    output_dict_['acc_expired'] = user_.acc_expired
+                else:
+                    output_dict_['text'] = 'This refresh-token expired, need login again'
             else:
-                pass
-    except:
-        pass
+                output_dict_['text'] = 'No such token'
+    except Exception as e_:
+        print(e_)
     return output_dict_
 
 #####=====----- THE END -----=====#########################################

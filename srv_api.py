@@ -185,7 +185,13 @@ def post_login(credentials: dict) -> dict:
 
 
 def post_refresh_token(refresh_access: dict) -> dict:
-    '''
+    ''' Метод для обновления access-token через действующий
+    refresh-token
+    Arguments:
+        refresh_access [dict] -- Словарь/json с ключом "ref_token"
+    Returns:
+        [dict] -- Словарь/json с ключами "status", "text", "acc_token",
+            "acc_expired" или с ключами "status", "text" в случае ошибки
     '''
     output_dict_ = {'status': 'fail',
                     'text': 'Unknown request'

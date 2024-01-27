@@ -21,7 +21,7 @@ DB_PATH = 'sqlite:///sqlite/users.sqlite3'
 Base = declarative_base()
 ENGINE = sa.create_engine(DB_PATH)
 # Временная база для модели
-MODEL_DB_PATH = 'sqlite:///sqlite/model3.sqlite3'
+MODEL_DB_PATH = 'sqlite:///sqlite/model2.sqlite3'
 ModelBase = declarative_base()
 MODEL_ENGINE = sa.create_engine(MODEL_DB_PATH)
 # Время жизни access-token
@@ -71,7 +71,7 @@ class Model_Base(ModelBase):
     out = sa.Column(sa.Text())
     prediction = sa.Column(sa.Float())
 
-Base.metadata.create_all(MODEL_ENGINE)
+##### Base.metadata.create_all(MODEL_ENGINE)
 
 
 ''' =====----- API Methods -----===== '''
@@ -131,8 +131,9 @@ def get_predictions():
     with Session(MODEL_ENGINE) as t_:
         all_predictions = t_.query(Model_Base).all()
     for student in all_predictions:
-        output_list_.append({'tg_id': student.tg_id,
-                             'project_role': student.project_role,
+        output_list_.append({'p_key': student.p_key,
+                             'tg_id': student.id,
+                             'project_role': student.role_in,
                              'prediction': student.prediction
                            })
     return output_list_

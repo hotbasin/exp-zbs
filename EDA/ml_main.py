@@ -1,4 +1,4 @@
-!pip install category_encoders
+# !pip install category_encoders
 import category_encoders as ce
 import pickle
 import pandas as pd

@@ -74,70 +74,34 @@ class Model_Base(ModelBase):
 ##### Base.metadata.create_all(MODEL_ENGINE)
 
 
+''' =====----- Decorators -----===== '''
+
+def token_decor(fn_to_be_decor):
+    def fn_wrapper(**kwargs):
+        ok_ = False
+        payload_ = dict()
+        if 'token' in kwargs.keys():
+            token = kwargs['token']
+            try:
+                with Session(ENGINE) as s_:
+                    user_ = s_.query(User).filter(User.acc_token == token).first()
+                try:
+                    if user_.acc_expired > time():
+                        # TTL токена не закончилось
+                        ok_ = True
+                except:
+                    # TTL токена закончилось или его нет
+                    ok_ = False
+            except:
+                # Что-то не так с БД
+                ok_ = False
+        # result_ = fn_to_be_decor(auth_ok=ok_, payload=payload_, **kwargs)
+        result_ = fn_to_be_decor(auth_ok=ok_, **kwargs)
+        return result_
+    return fn_wrapper
+
+
 ''' =====----- API Methods -----===== '''
-
-def get_random_data():
-    ''' Для отладки взаимодействия с frontend.
-    Отдаёт json (список словарей) со случайными значениями [float] в
-    интервале [0, 1] по неким именам.
-    Returns:
-        [json] -- Список словарей
-    '''
-    output_list_ = []
-    name_list_ = [
-        'William', 'Shatner', 'Kirk', 'Leonard', 'Nimoy',
-        'Spock', 'DeForest', 'Kelley', 'McCoy', 'James',
-        'Doohan', 'Scott', 'Nichelle', 'Nichols', 'Uhura',
-        'Walter', 'Koenig', 'Chekov', 'George', 'Takei',
-        'Sulu', 'Picard', 'Riker', 'LaForge', 'Yar',
-        'Worf', 'Crusher', 'Troi', 'Data', 'Wesley'
-        ]
-    for i_ in range(0, 3):
-        output_list_.append({'name': choice(name_list_), 'prob': round(random(), 2)})
-    return output_list_
-
-
-def get_datafile() -> dict:
-    ''' Выдаёт атрибуты последнего удачно загруженного файла с данными
-    Returns:
-        [dict] -- словарь/json с ключами 'filename': (str),
-            'filesize': (int), 'loaddate': (float)
-    '''
-    output_dict_ = dict()
-    with Session(ENGINE) as s_:
-        filedata_ = s_.query(File).first()
-    output_dict_['filename'] = filedata_.filename
-    output_dict_['filesize'] = filedata_.filesize
-    output_dict_['loaddate'] = filedata_.loaddate
-    return output_dict_
-
-
-def update_last_file_data(filename: str, filesize: int, loaddate: float):
-    with Session(ENGINE) as s_:
-        filedata_ = s_.query(File).first()
-        filedata_.filename = filename
-        filedata_.filesize = filesize
-        filedata_.loaddate = loaddate
-        s_.add(filedata_)
-        s_.commit()
-
-
-def get_predictions():
-    ''' Выдает список предсказанных вероятностей поимённо
-    Returns:
-        [json] -- Список словарей
-    '''
-    output_list_ = []
-    with Session(MODEL_ENGINE) as t_:
-        all_predictions = t_.query(Model_Base).all()
-    for student in all_predictions:
-        output_list_.append({'p_key': student.p_key,
-                             'tg_id': student.id,
-                             'project_role': student.role_in,
-                             'prediction': student.prediction
-                           })
-    return output_list_
-
 
 def post_login(credentials: dict) -> dict:
     ''' Метод для аутентификации на сервере. При логине пользователя
@@ -219,5 +183,80 @@ def post_refresh_token(refresh_access: dict) -> dict:
     except Exception as e_:
         print(e_)
     return output_dict_
+
+
+def get_random_data():
+    ''' Для отладки взаимодействия с frontend.
+    Отдаёт json (список словарей) со случайными значениями [float] в
+    интервале [0, 1] по неким именам.
+    Returns:
+        [json] -- Список словарей
+    '''
+    output_list_ = []
+    name_list_ = [
+        'William', 'Shatner', 'Kirk', 'Leonard', 'Nimoy',
+        'Spock', 'DeForest', 'Kelley', 'McCoy', 'James',
+        'Doohan', 'Scott', 'Nichelle', 'Nichols', 'Uhura',
+        'Walter', 'Koenig', 'Chekov', 'George', 'Takei',
+        'Sulu', 'Picard', 'Riker', 'LaForge', 'Yar',
+        'Worf', 'Crusher', 'Troi', 'Data', 'Wesley'
+        ]
+    for i_ in range(0, 3):
+        output_list_.append({'name': choice(name_list_), 'prob': round(random(), 2)})
+    return output_list_
+
+
+# def get_random_data_t(auth_ok=False, payload=None, **kwargs):
+@token_decor
+def get_random_data_t(auth_ok=False, **kwargs):
+    if auth_ok:
+        return get_random_data()
+    else:
+        output_dict_ = {'status': 'fail',
+                        'text': 'Unauthorized request'
+                       }
+        return output_dict_
+
+
+def get_datafile() -> dict:
+    ''' Выдаёт атрибуты последнего удачно загруженного файла с данными
+    Returns:
+        [dict] -- словарь/json с ключами 'filename': (str),
+            'filesize': (int), 'loaddate': (float)
+    '''
+    output_dict_ = dict()
+    with Session(ENGINE) as s_:
+        filedata_ = s_.query(File).first()
+    output_dict_['filename'] = filedata_.filename
+    output_dict_['filesize'] = filedata_.filesize
+    output_dict_['loaddate'] = filedata_.loaddate
+    return output_dict_
+
+
+def update_last_file_data(filename: str, filesize: int, loaddate: float):
+    with Session(ENGINE) as s_:
+        filedata_ = s_.query(File).first()
+        filedata_.filename = filename
+        filedata_.filesize = filesize
+        filedata_.loaddate = loaddate
+        s_.add(filedata_)
+        s_.commit()
+
+
+def get_predictions():
+    ''' Выдает список предсказанных вероятностей поимённо
+    Returns:
+        [json] -- Список словарей
+    '''
+    output_list_ = []
+    with Session(MODEL_ENGINE) as t_:
+        all_predictions = t_.query(Model_Base).all()
+    for student in all_predictions:
+        output_list_.append({'p_key': student.p_key,
+                             'tg_id': student.id,
+                             'project_role': student.role_in,
+                             'prediction': student.prediction
+                           })
+    return output_list_
 
 #####=====----- THE END -----=====#########################################

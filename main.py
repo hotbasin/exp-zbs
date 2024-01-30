@@ -67,6 +67,20 @@ async def server_root() -> str:
     return responses.FileResponse(ROOT_INDEX_FILE)
 
 
+@srv.post('/srv1/auth/login')
+async def post_login(credentials: Credentials):
+    ''' Аутентификация на сервере
+    '''
+    return responses.ORJSONResponse(api_.post_login(dict(credentials)))
+
+
+@srv.post('/srv1/auth/refresh')
+async def post_refresh_token(refresh_access: RefreshToken):
+    ''' Обновление access-token через refresh-token
+    '''
+    return responses.ORJSONResponse(api_.post_refresh_token(dict(refresh_access)))
+
+
 @srv.get('/random_data')
 async def get_random_data() -> str:
     ''' Для отладки взаимодействия с frontend.
@@ -76,6 +90,12 @@ async def get_random_data() -> str:
         [json] -- Список словарей
     '''
     return responses.ORJSONResponse(api_.get_random_data())
+
+
+@srv.get('/srv1/random_data')
+async def get_random_data_t(tk: str):
+    # return {'acc_token': tk}
+    return responses.ORJSONResponse(api_.get_random_data_t(token=tk))
 
 
 @srv.get('/data-file')
@@ -108,20 +128,6 @@ async def get_predictions() -> str:
         [json] -- Список словарей
     '''
     return responses.ORJSONResponse(api_.get_predictions())
-
-
-@srv.post('/srv1/auth/login')
-async def post_login(credentials: Credentials):
-    ''' Аутентификация на сервере
-    '''
-    return responses.ORJSONResponse(api_.post_login(dict(credentials)))
-
-
-@srv.post('/srv1/auth/refresh')
-async def post_refresh_token(refresh_access: RefreshToken):
-    ''' Обновление access-token через refresh-token
-    '''
-    return responses.ORJSONResponse(api_.post_refresh_token(dict(refresh_access)))
 
 
 ''' =====----- MAIN -----===== '''

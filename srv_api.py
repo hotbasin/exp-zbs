@@ -25,9 +25,9 @@ MODEL_DB_PATH = 'sqlite:///sqlite/model2.sqlite3'
 ModelBase = declarative_base()
 MODEL_ENGINE = sa.create_engine(MODEL_DB_PATH)
 # Время жизни access-token
-ACC_TTL = 600.0
+ACC_TTL = 3600.0 * 24
 # Время жизни refresh-token
-REF_TTL = 3600.0
+REF_TTL = 3600.0 * 72
 
 
 ''' =====----- Classes -----===== '''
@@ -81,10 +81,10 @@ def token_decor(fn_to_be_decor):
         ok_ = False
         payload_ = dict()
         if 'token' in kwargs.keys():
-            token = kwargs['token']
+            token_ = kwargs['token']
             try:
                 with Session(ENGINE) as s_:
-                    user_ = s_.query(User).filter(User.acc_token == token).first()
+                    user_ = s_.query(User).filter(User.acc_token == token_).first()
                 try:
                     if user_.acc_expired > time():
                         # TTL токена не закончилось
@@ -206,7 +206,6 @@ def get_random_data():
     return output_list_
 
 
-# def get_random_data_t(auth_ok=False, payload=None, **kwargs):
 @token_decor
 def get_random_data_t(auth_ok=False, **kwargs):
     if auth_ok:
@@ -233,14 +232,15 @@ def get_datafile() -> dict:
     return output_dict_
 
 
-def update_last_file_data(filename: str, filesize: int, loaddate: float):
-    with Session(ENGINE) as s_:
-        filedata_ = s_.query(File).first()
-        filedata_.filename = filename
-        filedata_.filesize = filesize
-        filedata_.loaddate = loaddate
-        s_.add(filedata_)
-        s_.commit()
+@token_decor
+def get_datafile_t(auth_ok=False, **kwargs):
+    if auth_ok:
+        return get_datafile()
+    else:
+        output_dict_ = {'status': 'fail',
+                        'text': 'Unauthorized request'
+                       }
+        return output_dict_
 
 
 def get_predictions():
@@ -258,5 +258,15 @@ def get_predictions():
                              'prediction': student.prediction
                            })
     return output_list_
+
+
+def update_last_file_data(filename: str, filesize: int, loaddate: float):
+    with Session(ENGINE) as s_:
+        filedata_ = s_.query(File).first()
+        filedata_.filename = filename
+        filedata_.filesize = filesize
+        filedata_.loaddate = loaddate
+        s_.add(filedata_)
+        s_.commit()
 
 #####=====----- THE END -----=====#########################################

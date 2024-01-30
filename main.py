@@ -94,7 +94,6 @@ async def get_random_data() -> str:
 
 @srv.get('/srv1/random_data')
 async def get_random_data_t(tk: str):
-    # return {'acc_token': tk}
     return responses.ORJSONResponse(api_.get_random_data_t(token=tk))
 
 
@@ -105,6 +104,20 @@ async def get_datafile():
         [json] -- словарь/json с ключами 'filename', 'filesize', 'loaddate'
     '''
     return responses.ORJSONResponse(api_.get_datafile())
+
+
+@srv.get('/srv1/data-file')
+async def get_datafile_t(tk: str):
+    return responses.ORJSONResponse(api_.get_datafile_t(token=tk))
+
+
+@srv.get('/predictions')
+async def get_predictions() -> str:
+    ''' Выдает список предсказанных вероятностей поимённо
+    Returns:
+        [json] -- Список словарей
+    '''
+    return responses.ORJSONResponse(api_.get_predictions())
 
 
 @srv.post('/srv1/model/ini_bin_upload')
@@ -119,15 +132,6 @@ async def post_bin_upload(file: UploadFile):
                                    'filename': filename_,
                                    'filesize': filesize_,
                                    'loaddate': loaddate_})
-
-
-@srv.get('/predictions')
-async def get_predictions() -> str:
-    ''' Выдает список предсказанных вероятностей поимённо
-    Returns:
-        [json] -- Список словарей
-    '''
-    return responses.ORJSONResponse(api_.get_predictions())
 
 
 ''' =====----- MAIN -----===== '''

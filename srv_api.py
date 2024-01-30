@@ -260,6 +260,17 @@ def get_predictions():
     return output_list_
 
 
+@token_decor
+def get_predictions_t(auth_ok=False, **kwargs):
+    if auth_ok:
+        return get_predictions()
+    else:
+        output_dict_ = {'status': 'fail',
+                        'text': 'Unauthorized request'
+                       }
+        return output_dict_
+
+
 def update_last_file_data(filename: str, filesize: int, loaddate: float):
     with Session(ENGINE) as s_:
         filedata_ = s_.query(File).first()

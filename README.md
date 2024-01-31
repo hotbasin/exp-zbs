@@ -24,11 +24,10 @@ Backend, DE, DA, ML experiment
 
 ## Задание ##
 
-1. Переход на Python 10+.
-2. Испольщование на back-end FastAPI, Uvicorn.
-3. Использование SQLite для работы с БД.
-4. Последующий переход на PostgreSQL.
-5. Применение Docker.
+1. Испольщование на back-end FastAPI, Uvicorn.
+2. Использование SQLite для работы с БД.
+3. Последующий переход на PostgreSQL.
+4. Применение Docker container
 
 [:arrow_up: Содержание](#содержание)
 
@@ -55,6 +54,16 @@ Backend, DE, DA, ML experiment
 ----
 
 ## Решение ##
+
+Для корректной работы обученных моделей рекомендуется установка библиотек
+конкретных версий и в следующем порядке:
+
+1. numpy==1.23.5
+2. pandas==1.5.3
+3. scikit-learn==1.2.2
+4. category-encoders==2.6.3
+5. imbalanced-learn==0.10.1 + imblearn
+6. pyxl/openpyxl&nbsp;&mdash; для возможности обработки файлов Excel
 
 [:arrow_up: Содержание](#содержание)
 

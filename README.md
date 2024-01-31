@@ -67,7 +67,7 @@ Backend, DE, DA, ML experiment
 
 ## Запуск проекта ##
 
-Проект запускается в docker-container на сервере с ОС Ubuntu Server LTS.
+Проект запускается в docker-container на сервере с ОС Ubuntu Server LTS (Jammy).
 
 Каноническая установка docker и docker-compose (под `sudo -i`):
 
@@ -79,10 +79,43 @@ apt update
 отсутствии установить:
 ```bash
 apt install ca-certificates
-apt install curl
-apt install gnupg
-apt install software-properties-common
+            curl
+            gnupg
+            software-properties-common
 ```
+3. Скачать GPG-ключ репозитория Docker:
+```bash
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+```
+4. Создать `/etc/apt/sources.list.d/docker.list`, в котором:
+```bash
+deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download/docker.com/linux/ubuntu jammy stable
+```
+5. Ещё раз
+```bash
+apt update
+```
+6. Проверить на всякий случай, что установка будет из репозитория Docker:
+```bash
+apt-cache policy docker-ce
+```
+7. Собственно установка:
+```bash
+apt install docker-ce
+            docker-ce-cli
+            containerd.io
+            docker-buildx-plugin
+            docker-compose-plugin
+```
+8. Проверка:
+```bash
+systemctl status docker.service
+```
+Или ещё можно запустить тестовый контейнер:
+```bash
+docker run hello-world
+```
+9. В файле `/etc/group` добавить своего пользователя в группу `docker`.
 
 Для корректной работы обученных моделей рекомендуется установка библиотек
 конкретных версий и в следующем порядке:

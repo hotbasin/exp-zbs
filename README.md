@@ -55,16 +55,6 @@ Backend, DE, DA, ML experiment
 
 ## Решение ##
 
-Для корректной работы обученных моделей рекомендуется установка библиотек
-конкретных версий и в следующем порядке:
-
-1. numpy==1.23.5
-2. pandas==1.5.3
-3. scikit-learn==1.2.2
-4. category-encoders==2.6.3
-5. imbalanced-learn==0.10.1 + imblearn
-6. pyxl/openpyxl&nbsp;&mdash; для возможности обработки файлов Excel
-
 [:arrow_up: Содержание](#содержание)
 
 ----
@@ -76,6 +66,33 @@ Backend, DE, DA, ML experiment
 ----
 
 ## Запуск проекта ##
+
+Проект запускается в docker-container на сервере с ОС Ubuntu Server LTS.
+
+Каноническая установка docker и docker-compose (под `sudo -i`):
+
+1. Обычное обновление
+```bash
+apt update
+```
+2. Проверить наличие пакетов через `apt search`. Обычно они уже есть, но при
+отсутствии установить:
+```bash
+apt install ca-certificates
+apt install curl
+apt install gnupg
+apt install software-properties-common
+```
+
+Для корректной работы обученных моделей рекомендуется установка библиотек
+конкретных версий и в следующем порядке:
+
+1. numpy==1.23.5
+2. pandas==1.5.3
+3. scikit-learn==1.2.2
+4. category-encoders==2.6.3
+5. imbalanced-learn==0.10.1 + imblearn
+6. pyxl/openpyxl&nbsp;&mdash; для возможности обработки файлов Excel
 
 [:arrow_up: Содержание](#содержание)
 

@@ -128,6 +128,8 @@ docker run hello-world
 5. imbalanced-learn==0.10.1 + imblearn
 6. pyxl/openpyxl&nbsp;&mdash; для возможности обработки файлов Excel
 
+Предположительно имеет смысл порядок установки
+
 ```bash
 pip install "fastapi[all]"
 ```

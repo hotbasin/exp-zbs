@@ -34,6 +34,7 @@ srv.add_middleware(
 ROOT_INDEX_FILE = path.join(path.dirname(path.abspath(__file__)),
                             'static/index.html')
 TMP_CSV_FILE = 'tests/binary_file.csv'
+TMP_ANKETA_FILE = 'ds_model/file_'
 # IP или FQDN сервера, на котором работает приложение
 HOST = '0.0.0.0'
 # TCP-порт, на котором работает прилржение
@@ -134,6 +135,22 @@ async def post_bin_upload(file: UploadFile):
     loaddate_ = time()
     api_.update_last_file_data(filename_, filesize_, loaddate_)
     return responses.JSONResponse({'status': 'File accepted',
+                                   'filename': filename_,
+                                   'filesize': filesize_,
+                                   'loaddate': loaddate_})
+
+
+@srv.post('/srv1/model/data_upload')
+async def post_bin_upload(file: UploadFile):
+    filename_ = file.filename
+    filesize_ = file.size
+    loaddate_ = time()
+    model_data_file = TMP_ANKETA_FILE + filename_
+    with open(model_data_file, 'wb') as wb_:
+        wb_.write(file.file.read())
+    api_.update_last_file_data(filename_, filesize_, loaddate_)
+    api_.model_works(model_data_file)
+    return responses.JSONResponse({'status': 'CSV-File accepted',
                                    'filename': filename_,
                                    'filesize': filesize_,
                                    'loaddate': loaddate_})

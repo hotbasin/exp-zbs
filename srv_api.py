@@ -13,6 +13,9 @@ from random import choice, random
 import sqlalchemy as sa
 from sqlalchemy.orm import declarative_base, Session
 
+from ds_model import ds_model as ds_
+##### import model_api as ds_
+
 
 ''' =====----- Global variables -----====='''
 
@@ -21,7 +24,8 @@ DB_PATH = 'sqlite:///sqlite/users.sqlite3'
 Base = declarative_base()
 ENGINE = sa.create_engine(DB_PATH)
 # Временная база для модели
-MODEL_DB_PATH = 'sqlite:///sqlite/model2.sqlite3'
+##### MODEL_DB_PATH = 'sqlite:///sqlite/model2.sqlite3'
+MODEL_DB_PATH = 'sqlite:///ds_model/model2.sqlite3'
 ModelBase = declarative_base()
 MODEL_ENGINE = sa.create_engine(MODEL_DB_PATH)
 # Время жизни access-token
@@ -68,10 +72,9 @@ class Model_Base(ModelBase):
     notes = sa.Column(sa.Text())
     language = sa.Column(sa.String())
     in_chat = sa.Column(sa.String())
-    out = sa.Column(sa.Text())
-    prediction = sa.Column(sa.Float())
+    fin_pred = sa.Column(sa.Float())
 
-##### Base.metadata.create_all(MODEL_ENGINE)
+ModelBase.metadata.create_all(MODEL_ENGINE)
 
 
 ''' =====----- Decorators -----===== '''
@@ -278,6 +281,41 @@ def update_last_file_data(filename: str, filesize: int, loaddate: float):
         filedata_.filesize = filesize
         filedata_.loaddate = loaddate
         s_.add(filedata_)
+        s_.commit()
+
+
+def model_works(model_data_file: str):
+    try:
+        with Session(MODEL_ENGINE) as s_:
+            s_.query(Model_Base).filter(Model_Base.p_key >= 1)\
+                                .delete(synchronize_session='fetch')
+            s_.commit()
+    except:
+        pass
+    ini_df = ds_.pd.read_csv(model_data_file, sep='^')
+    try:
+        ini_df = ini_df.drop(['out'], axis=1)
+    except:
+        pass
+    new_df = ds_.prediction(ini_df)
+    with Session(MODEL_ENGINE) as s_:
+        for index_ in range(new_df.shape[0]):
+            new_line_ = Model_Base(date=new_df.date.iloc[index_],
+                                id=new_df.id.iloc[index_],
+                                utc=new_df.utc.iloc[index_],
+                                steck=new_df.steck.iloc[index_],
+                                spec=new_df.spec.iloc[index_],
+                                role=new_df.role.iloc[index_],
+                                role_in=new_df.role_in.iloc[index_],
+                                hour_per_week=new_df.hour_per_week.iloc[index_],
+                                other_courses=new_df.other_courses.iloc[index_],
+                                time_of_studies=new_df.time_of_studies.iloc[index_],
+                                notes=new_df.notes.iloc[index_],
+                                language=new_df.language.iloc[index_],
+                                in_chat=new_df.in_chat.iloc[index_],
+                                fin_pred=new_df.fin_pred.iloc[index_]
+                                )
+            s_.add(new_line_)
         s_.commit()
 
 #####=====----- THE END -----=====#########################################

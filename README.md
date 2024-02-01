@@ -128,6 +128,17 @@ docker run hello-world
 5. imbalanced-learn==0.10.1 + imblearn
 6. pyxl/openpyxl&nbsp;&mdash; для возможности обработки файлов Excel
 
+```bash
+pip install "fastapi[all]"
+```
+
+Должно быть эквивалентно:
+
+```bash
+pip install fastapi
+pip install "uvicorn[standard]"
+```
+
 [:arrow_up: Содержание](#содержание)
 
 ----

@@ -258,7 +258,7 @@ def get_predictions():
         output_list_.append({'p_key': student.p_key,
                              'tg_id': student.id,
                              'project_role': student.role_in,
-                             'prediction': student.prediction
+                             'prediction': student.fin_pred
                            })
     return output_list_
 

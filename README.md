@@ -118,6 +118,11 @@ systemctl status docker.service
 docker run hello-world
 ```
 9. В файле `/etc/group` добавить своего пользователя в группу `docker`.
+10. Сборка docker-image:
+```bash
+cd ${PROJECT_DIR}
+docker build -t zbs:ver1 .
+```
 
 Для корректной работы обученных моделей рекомендуется установка библиотек
 конкретных версий и в следующем порядке (перед формированием итогового файла

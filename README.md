@@ -85,7 +85,8 @@ apt install ca-certificates
 ```
 3. Скачать GPG-ключ репозитория Docker:
 ```bash
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+        gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 ```
 4. Создать `/etc/apt/sources.list.d/docker.list`, в котором:
 ```bash

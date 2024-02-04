@@ -90,7 +90,8 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
 ```
 4. Создать `/etc/apt/sources.list.d/docker.list`, в котором:
 ```bash
-deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download/docker.com/linux/ubuntu jammy stable
+deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] \
+        https://download/docker.com/linux/ubuntu jammy stable
 ```
 5. Ещё раз
 ```bash

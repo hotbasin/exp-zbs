@@ -17,7 +17,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
 
-import srv_api as api_
+import srv_api_a as api_
 
 
 ''' =====----- Global variables -----===== '''

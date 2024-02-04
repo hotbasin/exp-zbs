@@ -161,8 +161,3 @@ pip install "uvicorn[standard]"
 cd ${PROJECT_DIR}
 docker build -t zbs:ver1 .
 ```
-
-Запуск контейнера
-```bash
-docker run -d -p 8080:7077/tcp zbs:ver1
-```

@@ -155,9 +155,3 @@ pip install "uvicorn[standard]"
 [:arrow_up: Содержание](#содержание)
 
 ----
-
-Сборка docker-image:
-```bash
-cd ${PROJECT_DIR}
-docker build -t zbs:ver1 .
-```

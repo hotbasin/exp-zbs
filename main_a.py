@@ -32,6 +32,7 @@ srv.add_middleware(
     allow_methods=['*'],
     allow_headers=['*']
 )
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
 # Корневой index.html
 ROOT_INDEX_FILE = path.join(path.dirname(path.abspath(__file__)),
                             'static/index.html')
@@ -95,9 +96,13 @@ async def get_random_data() -> str:
     return responses.ORJSONResponse(api_.get_random_data())
 
 
-@srv.get('/srv1/random_data')
-async def get_random_data_t(tk: str):
-    return responses.ORJSONResponse(api_.get_random_data_t(token=tk))
+##### async def get_random_data_t(tk: str):
+@srv.get('/srv1/random_data_auth')
+async def get_random_data_t(token: Annotated[str, Depends(oauth2_scheme)]):
+    ''' Для проверки авторизованного доступа
+    '''
+    ##### return responses.ORJSONResponse(api_.get_random_data_t(token=tk))
+    return {'token': token}
 
 
 @srv.get('/data-file')

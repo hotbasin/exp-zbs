@@ -11,9 +11,11 @@ sys.path.append('~/.local/bin')
 from os import path
 from pathlib import Path
 from time import time
+from typing import Annotated
 
-from fastapi import FastAPI, responses, File, UploadFile
+from fastapi import FastAPI, responses, File, UploadFile, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel
 import uvicorn
 

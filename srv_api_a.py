@@ -209,6 +209,7 @@ def get_random_data():
     return output_list_
 
 
+'''
 @token_decor
 def get_random_data_t(auth_ok=False, **kwargs):
     if auth_ok:
@@ -218,6 +219,7 @@ def get_random_data_t(auth_ok=False, **kwargs):
                         'text': 'Unauthorized request'
                        }
         return output_dict_
+'''
 
 
 def get_datafile() -> dict:

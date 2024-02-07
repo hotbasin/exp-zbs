@@ -59,6 +59,16 @@ class RefreshToken(BaseModel):
     ref_token: str
 
 
+class User(BaseModel):
+    username: str
+    email: str | None = None
+    full_name: str | None = None
+    disabled: bool | None = None
+
+
+''' =====----- Functions -----===== '''
+
+
 ''' =====----- Endpoints -----===== '''
 
 @srv.get('/')
@@ -170,7 +180,7 @@ if __name__ == '__main__':
        Path(HOST_CERT_FILE).exists() and \
        Path(PRIV_CERT_FILE).exists():
         uvicorn.run(
-            'main_a:srv',
+            'main_b:srv',
             host=HOST,
             port=PORT,
             reload=True,
@@ -180,7 +190,7 @@ if __name__ == '__main__':
         )
     else:
         uvicorn.run(
-            'main_a:srv',
+            'main_b:srv',
             host=HOST,
             port=PORT,
             reload=True

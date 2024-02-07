@@ -97,7 +97,7 @@ async def get_random_data() -> str:
 
 
 ##### async def get_random_data_t(tk: str):
-@srv.get('/srv1/random_data_auth')
+@srv.get('/srv1/random_data')
 async def get_random_data_t(token: Annotated[str, Depends(oauth2_scheme)]):
     ''' Для проверки авторизованного доступа
     '''
@@ -170,7 +170,7 @@ if __name__ == '__main__':
        Path(HOST_CERT_FILE).exists() and \
        Path(PRIV_CERT_FILE).exists():
         uvicorn.run(
-            'main:srv',
+            'main_a:srv',
             host=HOST,
             port=PORT,
             reload=True,
@@ -180,7 +180,7 @@ if __name__ == '__main__':
         )
     else:
         uvicorn.run(
-            'main:srv',
+            'main_a:srv',
             host=HOST,
             port=PORT,
             reload=True

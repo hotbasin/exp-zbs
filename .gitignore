@@ -7,7 +7,7 @@ EDA/data/*\.xlsx
 EDA/data/*\.csv
 EDA/data/*\.pkl
 EDA/*\.sqlite3
-##### certs/
+certs/
 sqlite/sqlite3\.*
 tests/*\.csv
 tests/*\.json

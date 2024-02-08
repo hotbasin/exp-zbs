@@ -81,15 +81,6 @@ async def server_root() -> str:
     return responses.FileResponse(ROOT_INDEX_FILE)
 
 
-##### async def get_random_data_t(tk: str):
-@srv.get('/srv1/random_data')
-async def get_random_data_t(token: Annotated[str, Depends(oauth2_scheme)]):
-    ''' Для проверки авторизованного доступа
-    '''
-    ##### return responses.ORJSONResponse(api_.get_random_data_t(token=tk))
-    return {'token': token}
-
-
 @srv.get('/data-file')
 async def get_datafile():
     ''' Выдаёт атрибуты последнего удачно загруженного файла с данными

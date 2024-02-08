@@ -81,17 +81,6 @@ async def server_root() -> str:
     return responses.FileResponse(ROOT_INDEX_FILE)
 
 
-@srv.get('/random_data')
-async def get_random_data() -> str:
-    ''' Для отладки взаимодействия с frontend.
-    Отдаёт json (список словарей) со случайными значениями [float] в
-    интервале [0, 1] по неким именам.
-    Returns:
-        [json] -- Список словарей
-    '''
-    return responses.ORJSONResponse(api_.get_random_data())
-
-
 ##### async def get_random_data_t(tk: str):
 @srv.get('/srv1/random_data')
 async def get_random_data_t(token: Annotated[str, Depends(oauth2_scheme)]):

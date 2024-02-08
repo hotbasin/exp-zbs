@@ -123,22 +123,6 @@ async def post_bin_upload(file: UploadFile):
                                    'loaddate': loaddate_})
 
 
-@srv.post('/srv1/model/data_upload')
-async def post_bin_upload(file: UploadFile):
-    filename_ = file.filename
-    filesize_ = file.size
-    loaddate_ = time()
-    model_data_file = TMP_ANKETA_FILE + filename_
-    with open(model_data_file, 'wb') as wb_:
-        wb_.write(file.file.read())
-    api_.update_last_file_data(filename_, filesize_, loaddate_)
-    api_.model_works(model_data_file)
-    return responses.JSONResponse({'status': 'CSV-File accepted',
-                                   'filename': filename_,
-                                   'filesize': filesize_,
-                                   'loaddate': loaddate_})
-
-
 ''' =====----- MAIN -----===== '''
 
 if __name__ == '__main__':

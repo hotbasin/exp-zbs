@@ -81,13 +81,6 @@ async def server_root() -> str:
     return responses.FileResponse(ROOT_INDEX_FILE)
 
 
-@srv.post('/srv1/auth/login')
-async def post_login(credentials: Credentials):
-    ''' Аутентификация на сервере
-    '''
-    return responses.ORJSONResponse(api_.post_login(dict(credentials)))
-
-
 @srv.post('/srv1/auth/refresh')
 async def post_refresh_token(refresh_access: RefreshToken):
     ''' Обновление access-token через refresh-token

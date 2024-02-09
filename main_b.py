@@ -81,11 +81,6 @@ async def server_root() -> str:
     return responses.FileResponse(ROOT_INDEX_FILE)
 
 
-@srv.get('/srv1/data-file')
-async def get_datafile_t(tk: str):
-    return responses.ORJSONResponse(api_.get_datafile_t(token=tk))
-
-
 @srv.get('/predictions')
 async def get_predictions() -> str:
     ''' Выдает список предсказанных вероятностей поимённо

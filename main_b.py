@@ -81,15 +81,6 @@ async def server_root() -> str:
     return responses.FileResponse(ROOT_INDEX_FILE)
 
 
-@srv.get('/data-file')
-async def get_datafile():
-    ''' Выдаёт атрибуты последнего удачно загруженного файла с данными
-    Returns:
-        [json] -- словарь/json с ключами 'filename', 'filesize', 'loaddate'
-    '''
-    return responses.ORJSONResponse(api_.get_datafile())
-
-
 @srv.get('/srv1/data-file')
 async def get_datafile_t(tk: str):
     return responses.ORJSONResponse(api_.get_datafile_t(token=tk))

@@ -81,11 +81,6 @@ async def server_root() -> str:
     return responses.FileResponse(ROOT_INDEX_FILE)
 
 
-@srv.get('/srv1/predictions')
-async def get_predictions_t(tk: str):
-    return responses.ORJSONResponse(api_.get_predictions_t(token=tk))
-
-
 @srv.post('/srv1/model/ini_bin_upload')
 async def post_bin_upload(file: UploadFile):
     with open(TMP_CSV_FILE, 'wb') as wb_:

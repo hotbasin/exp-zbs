@@ -81,20 +81,6 @@ async def server_root() -> str:
     return responses.FileResponse(ROOT_INDEX_FILE)
 
 
-@srv.post('/srv1/model/ini_bin_upload')
-async def post_bin_upload(file: UploadFile):
-    with open(TMP_CSV_FILE, 'wb') as wb_:
-        wb_.write(file.file.read())
-    filename_ = file.filename
-    filesize_ = file.size
-    loaddate_ = time()
-    api_.update_last_file_data(filename_, filesize_, loaddate_)
-    return responses.JSONResponse({'status': 'File accepted',
-                                   'filename': filename_,
-                                   'filesize': filesize_,
-                                   'loaddate': loaddate_})
-
-
 ''' =====----- MAIN -----===== '''
 
 if __name__ == '__main__':

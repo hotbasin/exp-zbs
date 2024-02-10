@@ -135,6 +135,8 @@ async def get_predictions_t(tk: str):
 
 @srv.post('/srv1/model/ini_bin_upload')
 async def post_bin_upload(file: UploadFile):
+    ''' Пробная загрузка любого файла
+    '''
     with open(TMP_CSV_FILE, 'wb') as wb_:
         wb_.write(file.file.read())
     filename_ = file.filename
@@ -149,6 +151,8 @@ async def post_bin_upload(file: UploadFile):
 
 @srv.post('/srv1/model/data_upload')
 async def post_bin_upload(file: UploadFile):
+    ''' Загрузка готового файла CSV и запуск обученной модели
+    '''
     filename_ = file.filename
     filesize_ = file.size
     loaddate_ = time()

@@ -47,4 +47,7 @@ def map_names(old_list: list, new_list: list) -> dict:
             dict_[old_name] = new_name
     return dict_
 
+demo_df.rename(columns=map_names(old_cols, new_cols), inplace=True)
+demo_df['date'] = demo_df['date'].apply(lambda x: str(x))
+
 #####=====----- THE END -----=====#########################################

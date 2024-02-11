@@ -40,4 +40,11 @@ new_cols = [
     'out'
 ]
 
+def map_names(old_list: list, new_list: list) -> dict:
+    dict_ = dict()
+    if len(old_list) == len(new_list):
+        for old_name, new_name in zip(old_list, new_list):
+            dict_[old_name] = new_name
+    return dict_
+
 #####=====----- THE END -----=====#########################################

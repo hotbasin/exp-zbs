@@ -49,5 +49,8 @@ def map_names(old_list: list, new_list: list) -> dict:
 
 demo_df.rename(columns=map_names(old_cols, new_cols), inplace=True)
 demo_df['date'] = demo_df['date'].apply(lambda x: str(x))
+demo_df['id'] = demo_df['id'].fillna(value='@unknown')
+
+demo_df.to_csv(CSV_FILE, sep='^', encoding='utf-8', index=False)
 
 #####=====----- THE END -----=====#########################################

@@ -6,6 +6,7 @@ from os import environ
 ''' =====----- Global variables -----===== '''
 
 # Значения по умолчанию для переменных программного окружения приложения
+APP_HOST_DEFAULT = '0.0.0.0'
 APP_PORT_DEFAULT = '7077'
 DB_HOST_DEFAULT = '127.0.0.1'
 DB_PORT_DEFAULT = '5432'
@@ -15,6 +16,12 @@ DB_NAME_DEFAULT = 'db.zbs'
 
 
 ''' =====----- Импорт/задание переменных окружения -----===== '''
+
+if app_host_ := environ.get('APP_HOST'):
+    APP_HOST = app_host_
+else:
+    APP_HOST = APP_HOST_DEFAULT
+
 
 if app_port_ := environ.get('APP_PORT'):
     APP_PORT = int(app_port_)
@@ -29,9 +36,9 @@ else:
 
 
 if db_port_ := environ.get('DB_PORT'):
-    DB_PORT = db_port_
+    DB_PORT = int(db_port_)
 else:
-    DB_PORT = DB_PORT_DEFAULT
+    DB_PORT = int(DB_PORT_DEFAULT)
 
 
 if db_user_ := environ.get('DB_USER'):

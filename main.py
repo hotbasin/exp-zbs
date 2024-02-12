@@ -18,6 +18,7 @@ from pydantic import BaseModel
 import uvicorn
 
 import srv_api as api_
+import set_env as e_
 
 
 ''' =====----- Global variables -----===== '''

@@ -1,9 +1,19 @@
 #!/usr/bin/python3
 
-from os import environ
+from os import environ, path
 
 
 ''' =====----- Global variables -----===== '''
+
+# Корневой index.html
+ROOT_INDEX_FILE = path.join(path.dirname(path.abspath(__file__)),
+                            'static/index.html')
+# Файлы сертификатов для SSL/TLS
+ROOT_CERT_FILE = 'certs/ca_certificate.crt'
+HOST_CERT_FILE = 'certs/certificate.crt'
+PRIV_KEY_FILE = 'certs/private.key'
+CSV_FILE = 'tests/binary_file.csv'
+ANKETA_FILE_PREFIX = 'ds_model/file_'
 
 # Значения по умолчанию для переменных программного окружения приложения
 APP_HOST_DEFAULT = '0.0.0.0'

@@ -8,7 +8,6 @@ sys.path.append('VENV/lib/python3.11/site-packages')
 sys.path.append('~/.local/bin')
 #################################################
 
-from os import path
 from pathlib import Path
 from time import time
 
@@ -31,19 +30,9 @@ srv.add_middleware(
     allow_methods=['*'],
     allow_headers=['*']
 )
-# Корневой index.html
-ROOT_INDEX_FILE = path.join(path.dirname(path.abspath(__file__)),
-                            'static/index.html')
-TMP_CSV_FILE = 'tests/binary_file.csv'
-TMP_ANKETA_FILE = 'ds_model/file_'
-# IP или FQDN сервера, на котором работает приложение
-HOST = '0.0.0.0'
-# TCP-порт, на котором работает прилржение
-PORT=7077
-# Файлы сертификатов для SSL/TLS
-ROOT_CERT_FILE = 'certs/ca_certificate.crt'
-HOST_CERT_FILE = 'certs/certificate.crt'
-PRIV_CERT_FILE = 'certs/private.key'
+
+##### CSV_FILE = 'tests/binary_file.csv'
+##### TMP_ANKETA_FILE = 'ds_model/file_'
 
 
 ''' =====----- Classes -----===== '''
@@ -66,7 +55,7 @@ async def server_root() -> str:
         [str] -- содержимое HTML-файла, заданного в глобальной
             переменной ROOT_INDEX_FILE
     '''
-    return responses.FileResponse(ROOT_INDEX_FILE)
+    return responses.FileResponse(e_.ROOT_INDEX_FILE)
 
 
 @srv.post('/srv1/auth/login')
@@ -131,7 +120,7 @@ async def get_predictions_t(tk: str):
 async def post_bin_upload(file: UploadFile):
     ''' Пробная загрузка любого файла
     '''
-    with open(TMP_CSV_FILE, 'wb') as wb_:
+    with open(e_.CSV_FILE, 'wb') as wb_:
         wb_.write(file.file.read())
     filename_ = file.filename
     filesize_ = file.size
@@ -150,7 +139,7 @@ async def post_bin_upload(file: UploadFile):
     filename_ = file.filename
     filesize_ = file.size
     loaddate_ = time()
-    model_data_file = TMP_ANKETA_FILE + filename_
+    model_data_file = e_.ANKETA_FILE_PREFIX + filename_
     with open(model_data_file, 'wb') as wb_:
         wb_.write(file.file.read())
     api_.update_last_file_data(filename_, filesize_, loaddate_)
@@ -164,23 +153,23 @@ async def post_bin_upload(file: UploadFile):
 ''' =====----- MAIN -----===== '''
 
 if __name__ == '__main__':
-    if Path(ROOT_CERT_FILE).exists() and \
-       Path(HOST_CERT_FILE).exists() and \
-       Path(PRIV_CERT_FILE).exists():
+    if Path(e_.ROOT_CERT_FILE).exists() and \
+       Path(e_.HOST_CERT_FILE).exists() and \
+       Path(e_.PRIV_KEY_FILE).exists():
         uvicorn.run(
             'main:srv',
-            host=HOST,
-            port=PORT,
+            host=e_.APP_HOST,
+            port=e_.APP_PORT,
             reload=True,
-            ssl_ca_certs=ROOT_CERT_FILE,
-            ssl_certfile=HOST_CERT_FILE,
-            ssl_keyfile=PRIV_CERT_FILE
+            ssl_ca_certs=e_.ROOT_CERT_FILE,
+            ssl_certfile=e_.HOST_CERT_FILE,
+            ssl_keyfile=e_.PRIV_KEY_FILE
         )
     else:
         uvicorn.run(
             'main:srv',
-            host=HOST,
-            port=PORT,
+            host=e_.APP_HOST,
+            port=e_.APP_PORT,
             reload=True
         )
 

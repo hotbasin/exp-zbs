@@ -84,23 +84,23 @@ async def server_root() -> str:
 ''' =====----- MAIN -----===== '''
 
 if __name__ == '__main__':
-    if Path(ROOT_CERT_FILE).exists() and \
-       Path(HOST_CERT_FILE).exists() and \
-       Path(PRIV_CERT_FILE).exists():
+    if Path(e_.ROOT_CERT_FILE).exists() and \
+       Path(e_.HOST_CERT_FILE).exists() and \
+       Path(e_.PRIV_KEY_FILE).exists():
         uvicorn.run(
             'main_b:srv',
-            host=HOST,
-            port=PORT,
+            host=e_.APP_HOST,
+            port=e_.APP_PORT,
             reload=True,
-            ssl_ca_certs=ROOT_CERT_FILE,
-            ssl_certfile=HOST_CERT_FILE,
-            ssl_keyfile=PRIV_CERT_FILE
+            ssl_ca_certs=e_.ROOT_CERT_FILE,
+            ssl_certfile=e_.HOST_CERT_FILE,
+            ssl_keyfile=e_.PRIV_KEY_FILE
         )
     else:
         uvicorn.run(
             'main_b:srv',
-            host=HOST,
-            port=PORT,
+            host=e_.APP_HOST,
+            port=e_.APP_PORT,
             reload=True
         )
 

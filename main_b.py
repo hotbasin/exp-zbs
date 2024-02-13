@@ -8,7 +8,6 @@ sys.path.append('VENV/lib/python3.11/site-packages')
 sys.path.append('~/.local/bin')
 #################################################
 
-from os import path
 from pathlib import Path
 from time import time
 from typing import Annotated
@@ -20,6 +19,7 @@ from pydantic import BaseModel
 import uvicorn
 
 import srv_api_a as api_
+import set_env as e_
 
 
 ''' =====----- Global variables -----===== '''

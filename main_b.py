@@ -78,7 +78,7 @@ async def server_root() -> str:
         [str] -- содержимое HTML-файла, заданного в глобальной
             переменной ROOT_INDEX_FILE
     '''
-    return responses.FileResponse(ROOT_INDEX_FILE)
+    return responses.FileResponse(e_.ROOT_INDEX_FILE)
 
 
 ''' =====----- MAIN -----===== '''

@@ -31,9 +31,6 @@ srv.add_middleware(
     allow_headers=['*']
 )
 
-##### CSV_FILE = 'tests/binary_file.csv'
-##### TMP_ANKETA_FILE = 'ds_model/file_'
-
 
 ''' =====----- Classes -----===== '''
 

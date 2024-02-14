@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 
+''' Code is based on
+https://fastapi.tiangolo.com/ru/tutorial/security/first-steps/
+'''
+
 #####=====----- TEMPORAL for VENV -----=====#####
 import sys
 sys.path.append('VENV/Lib/site-packages')
@@ -33,19 +37,6 @@ srv.add_middleware(
     allow_headers=['*']
 )
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
-# Корневой index.html
-##### ROOT_INDEX_FILE = path.join(path.dirname(path.abspath(__file__)),
-#####                             'static/index.html')
-##### TMP_CSV_FILE = 'tests/binary_file.csv'
-##### TMP_ANKETA_FILE = 'ds_model/file_'
-# IP или FQDN сервера, на котором работает приложение
-##### HOST = '0.0.0.0'
-# TCP-порт, на котором работает прилржение
-##### PORT=7077
-# Файлы сертификатов для SSL/TLS
-##### ROOT_CERT_FILE = 'certs/ca_certificate.crt'
-##### HOST_CERT_FILE = 'certs/certificate.crt'
-##### PRIV_CERT_FILE = 'certs/private.key'
 
 
 ''' =====----- Classes -----===== '''
@@ -68,6 +59,12 @@ class User(BaseModel):
 
 ''' =====----- Functions -----===== '''
 
+def fake_decode_token(token):
+    return User(username=token+'fakedecoded', email='ss@dd.ru', full_name='Stalk Spectrum')
+async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
+    user = fake_decode_token(token)
+    return user
+
 
 ''' =====----- Endpoints -----===== '''
 
@@ -79,6 +76,14 @@ async def server_root() -> str:
             переменной ROOT_INDEX_FILE
     '''
     return responses.FileResponse(e_.ROOT_INDEX_FILE)
+
+
+@srv.get('/items/')
+async def read_items(token: Annotated[str, Depends(oauth2_scheme)]):
+    return {'token': token}
+@srv.get('users/me')
+async def read_users_me(current_user: Annotated[User, Depends(get_current_user)]):
+    return current_user
 
 
 ''' =====----- MAIN -----===== '''

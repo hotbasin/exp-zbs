@@ -34,18 +34,18 @@ srv.add_middleware(
 )
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
 # Корневой index.html
-ROOT_INDEX_FILE = path.join(path.dirname(path.abspath(__file__)),
-                            'static/index.html')
-TMP_CSV_FILE = 'tests/binary_file.csv'
-TMP_ANKETA_FILE = 'ds_model/file_'
+##### ROOT_INDEX_FILE = path.join(path.dirname(path.abspath(__file__)),
+#####                             'static/index.html')
+##### TMP_CSV_FILE = 'tests/binary_file.csv'
+##### TMP_ANKETA_FILE = 'ds_model/file_'
 # IP или FQDN сервера, на котором работает приложение
-HOST = '0.0.0.0'
+##### HOST = '0.0.0.0'
 # TCP-порт, на котором работает прилржение
-PORT=7077
+##### PORT=7077
 # Файлы сертификатов для SSL/TLS
-ROOT_CERT_FILE = 'certs/ca_certificate.crt'
-HOST_CERT_FILE = 'certs/certificate.crt'
-PRIV_CERT_FILE = 'certs/private.key'
+##### ROOT_CERT_FILE = 'certs/ca_certificate.crt'
+##### HOST_CERT_FILE = 'certs/certificate.crt'
+##### PRIV_CERT_FILE = 'certs/private.key'
 
 
 ''' =====----- Classes -----===== '''

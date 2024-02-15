@@ -41,7 +41,7 @@ Backend, DE, DA, ML experiment
 - Восстановление работы
 - Восстановление доступа
 - Проверка восстановления
-- Авторизация OAuth2 [как описано](https://fastapi.tiangolo.com/ru/tutorial/security/first-steps/)
+- Авторизация OAuth2 [как описано в документации](https://fastapi.tiangolo.com/ru/tutorial/security/first-steps/)
 
 ----
 

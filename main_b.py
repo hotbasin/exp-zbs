@@ -30,6 +30,7 @@ import set_env as e_
 ''' =====----- Global variables -----===== '''
 
 srv = FastAPI()
+'''
 srv.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -37,6 +38,7 @@ srv.add_middleware(
     allow_methods=['*'],
     allow_headers=['*']
 )
+'''
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
 
 '''
@@ -77,14 +79,16 @@ fake_users_db = {
 
 ''' =====----- Classes -----===== '''
 
+'''
 class Credentials(BaseModel):
     login: str
     password: str
+'''
 
-
+'''
 class RefreshToken(BaseModel):
     ref_token: str
-
+'''
 
 class User(BaseModel):
     username: str

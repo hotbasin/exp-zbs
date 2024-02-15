@@ -28,6 +28,7 @@ Backend, DE, DA, ML experiment
 2. Использование SQLite для работы с БД.
 3. Последующий переход на PostgreSQL.
 4. Применение Docker container
+5. Авторизация OAuth2
 
 [:arrow_up: Содержание](#содержание)
 

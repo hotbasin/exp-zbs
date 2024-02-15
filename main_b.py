@@ -70,11 +70,12 @@ def fake_decode_token(token):
     return user
 
 async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
+    print(f'TOKEN={str(token)}')    #####<<<<< undefined
     user = fake_decode_token(token)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail='Invalid credentials in get_current_user',
+            detail=f'Invalid credentials in _{str(user)}_', #####<<<<< None
             headers={'WWW-Authenticate': 'Bearer'}
         )
     return user
@@ -84,14 +85,14 @@ async def get_current_active_user(current_user: Annotated[User, Depends(get_curr
         raise HTTPException(status_code=400, detail='Inactive user')
     return current_user
 
-# @srv.get('/')
-# async def server_root() -> str:
+@srv.get('/')
+async def server_root() -> str:
     ''' Аналог index.html в ServerRoot для начальной страницы FastAPI
     Returns:
         [str] -- содержимое HTML-файла, заданного в глобальной
             переменной ROOT_INDEX_FILE
     '''
-#     return responses.FileResponse(e_.ROOT_INDEX_FILE)
+    return responses.FileResponse(e_.ROOT_INDEX_FILE)
 
 # @srv.get('/items/')
 # async def read_items(token: Annotated[str, Depends(oauth2_scheme)]):

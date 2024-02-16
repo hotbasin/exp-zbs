@@ -64,16 +64,19 @@ class UserInDB(User):
 def get_user(db, username: str):
     if username in db:
         user_dict = db[username]
+        print(f'get_user() отработала')    #####<<<<<
         return UserInDB(**user_dict)
 
 def fake_decode_token(token):
     user = get_user(fake_users_db, token)
+    print(f'fake_decode_token() отработала')     #####<<<<<
     return user
 
 async def get_current_user(token: str=Depends(oauth2_scheme)):
+    print(f'get_current_user() начинает')    #####<<<<<
     print(f'TOKEN={str(token)}')    #####<<<<< undefined
-    user = fake_decode_token(token)
-    # user = fake_decode_token('john')
+    # user = fake_decode_token(token)
+    user = fake_decode_token('john')
     print(f'USER={str(user)}')
     if not user:
         raise HTTPException(
@@ -81,11 +84,13 @@ async def get_current_user(token: str=Depends(oauth2_scheme)):
             detail=f'Invalid credentials in _{str(user)}_',     #####<<<<< None
             headers={'WWW-Authenticate': 'Bearer'}
         )
+    print('get_current_user() отработала')      #####<<<<<
     return user
 
 async def get_current_active_user(current_user: User=Depends(get_current_user)):
     if current_user.disabled:
         raise HTTPException(status_code=400, detail='Inactive user')
+    print('get_current_active_user() отработала')   #####<<<<<
     return current_user
 
 @srv.get('/')
@@ -114,6 +119,7 @@ async def login(form_data: OAuth2PasswordRequestForm=Depends()):
 
 @srv.get('/users/me')
 async def read_users_me(current_user: User=Depends(get_current_active_user)):
+    print(f'BEGIN={str(current_user)}')
     return current_user
 
 

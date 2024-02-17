@@ -210,6 +210,29 @@ def prediction(dataframe: object) -> object:
     data.drop(object_columns, axis = 1, inplace=True)
 
     # Отследить путь к файлу
+    with open('ds_model/model_rf.pkl', 'rb') as pkl_file:
+        model_rf = pickle.load(pkl_file)
+
+    # Отследить путь к файлу
+    with open('ds_model/model_dt.pkl', 'rb') as pkl_file:
+        model_dt = pickle.load(pkl_file)
+
+    threshold = 0.45
+
+    y_rf_pred = pd.Series(model_rf.predict_proba(data)[:, 1])
+    y_rf_class = y_rf_pred.apply(lambda x: 1 if x > threshold else 0)
+
+    y_dt_pred = pd.Series(model_dt.predict_proba(data)[:, 1])
+    y_dt_class = y_dt_pred.apply(lambda x: 1 if x > threshold else 0)
+
+    test = pd.DataFrame({
+        'rf_pred': list(y_rf_pred),
+        'rf_class': y_rf_class,
+        'dt_pred': list(y_dt_pred),
+        'dt_class': y_dt_class
+        })
+
+    # Отследить путь к файлу
     with open('ds_model/scaler.pkl', 'rb') as pkl_file:
         scaler = pickle.load(pkl_file)
 
@@ -217,33 +240,10 @@ def prediction(dataframe: object) -> object:
     with open('ds_model/model_lr.pkl', 'rb') as pkl_file:
         model_lr = pickle.load(pkl_file)
 
-    # Отследить путь к файлу
-    with open('ds_model/model_rf.pkl', 'rb') as pkl_file:
-        model_rf = pickle.load(pkl_file)
+    X = scaler.transform(test)
 
-    threshold_lr_rf = 0.45
-
-    data_s = scaler.transform(data)
-
-    y_lr_pred = pd.Series(model_lr.predict_proba(data_s)[:, 1])
-    y_lr_class = y_lr_pred.apply(lambda x: 1 if x > threshold_lr_rf else 0)
-
-    y_rf_pred = pd.Series(model_rf.predict_proba(data)[:, 1])
-    y_rf_class = y_rf_pred.apply(lambda x: 1 if x > threshold_lr_rf else 0)
-
-    test = pd.DataFrame({
-        'rf_pred': list(y_rf_pred),
-        'rf_class': y_rf_class,
-        'lr_pred': list(y_lr_pred),
-        'lr_class': y_lr_class
-        })
-
-    # Отследить путь к файлу
-    with open('ds_model/model_dt.pkl', 'rb') as pkl_file:
-        model_dt = pickle.load(pkl_file)
-
-    y_dt_pred = pd.Series(model_dt.predict_proba(test)[:, 1])
-    df = pd.concat([dataframe, y_dt_pred], axis=1)
+    y_lr_pred = pd.Series(model_lr.predict_proba(X)[:, 1])
+    df = pd.concat([dataframe, y_lr_pred], axis=1)
     df.columns = ['date',
                   'id',
                   'utc',

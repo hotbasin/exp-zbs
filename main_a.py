@@ -39,10 +39,6 @@ ROOT_INDEX_FILE = path.join(path.dirname(path.abspath(__file__)),
                             'static/index.html')
 TMP_CSV_FILE = 'tests/binary_file.csv'
 TMP_ANKETA_FILE = 'ds_model/file_'
-# Файлы сертификатов для SSL/TLS
-ROOT_CERT_FILE = 'certs/ca_certificate.crt'
-HOST_CERT_FILE = 'certs/certificate.crt'
-PRIV_CERT_FILE = 'certs/private.key'
 
 
 ''' =====----- Classes -----===== '''

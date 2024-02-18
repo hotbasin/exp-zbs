@@ -8,7 +8,7 @@ sys.path.append('VENV/lib/python3.11/site-packages')
 sys.path.append('~/.local/bin')
 #################################################
 
-from os import path
+##### from os import path
 from pathlib import Path
 from time import time
 from typing import Annotated
@@ -186,8 +186,8 @@ if __name__ == '__main__':
     else:
         uvicorn.run(
             'main_a:srv',
-            host=HOST,
-            port=PORT,
+            host=e_.APP_HOST,
+            port=e_.APP_PORT,
             reload=True
         )
 

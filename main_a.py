@@ -176,8 +176,8 @@ if __name__ == '__main__':
        Path(PRIV_CERT_FILE).exists():
         uvicorn.run(
             'main_a:srv',
-            host=HOST,
-            port=PORT,
+            host=e_.APP_HOST,
+            port=e_.APP_PORT,
             reload=True,
             ssl_ca_certs=ROOT_CERT_FILE,
             ssl_certfile=HOST_CERT_FILE,

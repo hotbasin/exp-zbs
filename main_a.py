@@ -61,7 +61,7 @@ async def server_root() -> str:
         [str] -- содержимое HTML-файла, заданного в глобальной
             переменной ROOT_INDEX_FILE
     '''
-    return responses.FileResponse(ROOT_INDEX_FILE)
+    return responses.FileResponse(e_.ROOT_INDEX_FILE)
 
 
 @srv.post('/srv1/auth/login')
@@ -126,11 +126,13 @@ async def get_predictions_t(tk: str):
     return responses.ORJSONResponse(api_.get_predictions_t(token=tk))
 
 
-@srv.post('/srv1/model/ini_bin_upload')
+##### @srv.post('/srv1/model/ini_bin_upload')
+##### Временная рокировка эндпоинтов
+@srv.post('/srv1/model/data_upload')
 async def post_bin_upload(file: UploadFile):
     ''' Пробная загрузка любого файла
     '''
-    with open(TMP_CSV_FILE, 'wb') as wb_:
+    with open(e_.CSV_FILE, 'wb') as wb_:
         wb_.write(file.file.read())
     filename_ = file.filename
     filesize_ = file.size
@@ -142,19 +144,21 @@ async def post_bin_upload(file: UploadFile):
                                    'loaddate': loaddate_})
 
 
-@srv.post('/srv1/model/data_upload')
+##### @srv.post('/srv1/model/data_upload')
+##### Временная рокировка эндпоинтов
+@srv.post('/srv1/model/ini_bin_upload')
 async def post_bin_upload(file: UploadFile):
     ''' Загрузка готового файла CSV и запуск обученной модели
     '''
     filename_ = file.filename
     filesize_ = file.size
     loaddate_ = time()
-    model_data_file = TMP_ANKETA_FILE + filename_
+    model_data_file = e_.ANKETA_FILE_PREFIX + filename_
     with open(model_data_file, 'wb') as wb_:
         wb_.write(file.file.read())
     api_.update_last_file_data(filename_, filesize_, loaddate_)
     api_.model_works(model_data_file)
-    return responses.JSONResponse({'status': 'CSV-File accepted',
+    return responses.JSONResponse({'status': 'File accepted',
                                    'filename': filename_,
                                    'filesize': filesize_,
                                    'loaddate': loaddate_})

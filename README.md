@@ -1,4 +1,12 @@
-# Проект-полигон для отработки модели &laquo;Воронка HR&raquo; #
+<h3 align="center">:gb: Disclaimer</h3>
+
+:warning: This project is intended for use in a company with Russian-speaking
+specialists. Therefore, all explanations, comments, and other texts are provided
+in Russian only.
+
+----
+
+# :ru: Проект-полигон для отработки модели &laquo;Воронка HR&raquo; #
 Backend, DE, DA, ML experiment
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=plastic&logo=python&logoColor=ffdd54)

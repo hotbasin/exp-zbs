@@ -32,7 +32,8 @@ Backend, DE, DA, ML experiment
 
 ## Задание ##
 
-1. Испольщование на back-end FastAPI, Uvicorn.
+1. Создание backend-части проекта &laquo;Воронка HR&raquo;
+2. Испольщование FastAPI, Uvicorn.
 2. Использование SQLite для работы с БД.
 3. Последующий переход на PostgreSQL.
 4. Применение Docker container

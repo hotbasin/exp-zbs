@@ -34,10 +34,10 @@ Backend, DE, DA, ML experiment
 
 1. Создание backend-части проекта &laquo;Воронка HR&raquo;
 2. Испольщование FastAPI, Uvicorn.
-2. Использование SQLite для работы с БД.
-3. Последующий переход на PostgreSQL.
-4. Применение Docker container
-5. Авторизация OAuth2
+3. Использование SQLite для работы с БД.
+4. Последующий переход на PostgreSQL.
+5. Применение Docker container
+6. Авторизация OAuth2 (по возможности с JWT)
 
 [:arrow_up: Содержание](#содержание)
 

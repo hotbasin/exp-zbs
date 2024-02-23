@@ -113,7 +113,9 @@ async def get_predictions_t(tk: str):
     return responses.ORJSONResponse(api_.get_predictions_t(token=tk))
 
 
-@srv.post('/srv1/model/ini_bin_upload')
+##### @srv.post('/srv1/model/ini_bin_upload')
+##### Временная рокировка эндпоинтов
+@srv.post('/srv1/model/data_upload')
 async def post_bin_upload(file: UploadFile):
     ''' Пробная загрузка любого файла
     '''
@@ -129,7 +131,9 @@ async def post_bin_upload(file: UploadFile):
                                    'loaddate': loaddate_})
 
 
-@srv.post('/srv1/model/data_upload')
+##### @srv.post('/srv1/model/data_upload')
+##### Временная рокировка эндпоинтов
+@srv.post('/srv1/model/ini_bin_upload')
 async def post_bin_upload(file: UploadFile):
     ''' Загрузка готового файла CSV и запуск обученной модели
     '''

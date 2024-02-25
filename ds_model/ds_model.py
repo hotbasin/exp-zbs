@@ -15,6 +15,60 @@ import category_encoders as ce
 from imblearn.over_sampling import SMOTE
 
 
+''' =====----- Global variables -----===== '''
+
+old_cols = [
+    'Отметка времени',
+    'Профиль телеграмм (в формате @username)',
+    'Часовой пояс',
+    'Стек технологий',
+    'По какой специальности SF хотите заявиться?',
+    'Роль',
+    'В какой роли видите себя в проекте?',
+    'Сколько часов в неделю готовы уделять проекту?',
+    'Какие другие курсы закончили или находитесь в процессе обучения?',
+    'Как долго учитесь на курсах?',
+    'Notes',
+    'ЯП',
+    'Вступление в чат практики.',
+    'Выбыл'
+]
+new_cols = [
+    'date',
+    'id',
+    'utc',
+    'steck',
+    'spec',
+    'role',
+    'role_in',
+    'hour_per_week',
+    'other_courses',
+    'time_of_studies',
+    'notes',
+    'language',
+    'in_chat',
+    'out'
+]
+
+''' =====----- Функционал для препроцессинга -----===== '''
+
+def map_names(old_list: list, new_list: list) -> dict:
+    ''' Выставляет соответствие наименований признаков, полученных из
+    исходного файла формата XLSX, с наименованиями, принятыми в модели и
+    в базе данных
+    Arguments:
+        old_list [list] -- Список колонок в XLSX-файле
+        new_list [list] -- Список признаков в датафрейме для модели
+            (идентичный списку колонок в таблице БД)
+    Returns:
+        [dict] -- Словарь соответствий
+    '''
+    dict_ = dict()
+    if len(old_list) == len(new_list):
+        for old_name, new_name in zip(old_list, new_list):
+            dict_[old_name] = new_name
+    return dict_
+
 ''' =====----- Основная функция предсказаний -----===== '''
 
 def prediction(dataframe: object) -> object:

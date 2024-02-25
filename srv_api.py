@@ -304,6 +304,7 @@ def use_model(model_data_file: str):
         try:
             ini_df.rename(columns=ds_.map_names(ds_.old_cols, ds_.new_cols),
                           inplace=True)
+            ini_df = ini_df.drop(['out'], axis=1)
         except:
             # Добавить обработку ошибки
             pass

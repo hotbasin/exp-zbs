@@ -144,7 +144,7 @@ async def post_bin_upload(file: UploadFile):
     with open(model_data_file, 'wb') as wb_:
         wb_.write(file.file.read())
     api_.update_last_file_data(filename_, filesize_, loaddate_)
-    api_.model_works(model_data_file)
+    api_.use_model(model_data_file)
     return responses.JSONResponse({'status': 'CSV-File accepted',
                                    'filename': filename_,
                                    'filesize': filesize_,

@@ -301,6 +301,12 @@ def use_model(model_data_file: str):
     elif model_data_file[-5:] in ['.xlsx', 'XLSX']:
         ini_df = ds_.pd.read_excel(model_data_file)
         # Добавить препроцессинг столбцов
+        try:
+            ini_df.rename(columns=ds_.map_names(ds_.old_cols, ds_.new_cols),
+                          inplace=True)
+        except:
+            # Добавить обработку ошибки
+            pass
     else:
         # Добавить обработку ошибки
         pass

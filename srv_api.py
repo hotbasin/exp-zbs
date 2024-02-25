@@ -14,7 +14,6 @@ import sqlalchemy as sa
 from sqlalchemy.orm import declarative_base, Session
 
 from ds_model import ds_model as ds_
-##### import model_api as ds_
 
 
 ''' =====----- Global variables -----====='''

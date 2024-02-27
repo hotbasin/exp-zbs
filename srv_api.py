@@ -210,6 +210,8 @@ def get_random_data():
 
 @token_decor
 def get_random_data_t(auth_ok=False, **kwargs):
+    '''
+    '''
     if auth_ok:
         return get_random_data()
     else:
@@ -236,6 +238,8 @@ def get_datafile() -> dict:
 
 @token_decor
 def get_datafile_t(auth_ok=False, **kwargs):
+    '''
+    '''
     if auth_ok:
         return get_datafile()
     else:
@@ -264,6 +268,8 @@ def get_predictions():
 
 @token_decor
 def get_predictions_t(auth_ok=False, **kwargs):
+    '''
+    '''
     if auth_ok:
         return get_predictions()
     else:

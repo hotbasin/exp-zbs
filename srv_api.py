@@ -284,6 +284,9 @@ def update_last_file_data(filename: str, filesize: int, loaddate: float):
 
 
 def use_model(model_data_file: str):
+    ''' Формирует датафрейм из данных анкеты в загруженном файле и
+    отдаёт его заранее обученной модели.
+    '''
     try:
         with Session(MODEL_ENGINE) as s_:
             s_.query(Model_Base).filter(Model_Base.p_key >= 1)\

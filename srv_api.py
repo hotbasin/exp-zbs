@@ -334,7 +334,7 @@ def use_model(model_data_file: str):
     new_df = ds_.prediction(ini_df)
     with Session(MODEL_ENGINE) as s_:
         for index_ in range(new_df.shape[0]):
-            new_line_ = Model_Base(date=new_df.date.iloc[index_],
+            new_line_ = Model_Base(date=str(new_df.date.iloc[index_]),
                                    id=new_df.id.iloc[index_],
                                    utc=new_df.utc.iloc[index_],
                                    steck=new_df.steck.iloc[index_],

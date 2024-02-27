@@ -288,6 +288,8 @@ def use_model(model_data_file: str):
     отдаёт его заранее обученной модели. Полученные результаты
     предсказаний добавлябтся в датафрейм отдельным признаком fin_pred,
     который загружается в БД в таблицу Students.
+    Arguments:
+        model_data_file [str] -- Путь к файлу с анкетными данными
     '''
     try:
         with Session(MODEL_ENGINE) as s_:

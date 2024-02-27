@@ -274,6 +274,8 @@ def get_predictions_t(auth_ok=False, **kwargs):
 
 
 def update_last_file_data(filename: str, filesize: int, loaddate: float):
+    ''' Обновляет данные о загруженном файле в БД в таблице File
+    '''
     with Session(ENGINE) as s_:
         filedata_ = s_.query(File).first()
         filedata_.filename = filename

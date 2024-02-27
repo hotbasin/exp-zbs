@@ -285,7 +285,9 @@ def update_last_file_data(filename: str, filesize: int, loaddate: float):
 
 def use_model(model_data_file: str):
     ''' Формирует датафрейм из данных анкеты в загруженном файле и
-    отдаёт его заранее обученной модели.
+    отдаёт его заранее обученной модели. Полученные результаты
+    предсказаний добавлябтся в датафрейм отдельным признаком fin_pred,
+    который загружается в БД в таблицу Students.
     '''
     try:
         with Session(MODEL_ENGINE) as s_:

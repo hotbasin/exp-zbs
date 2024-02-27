@@ -275,6 +275,10 @@ def get_predictions_t(auth_ok=False, **kwargs):
 
 def update_last_file_data(filename: str, filesize: int, loaddate: float):
     ''' Обновляет данные о загруженном файле в БД в таблице File
+    Arguments:
+        filename [str] -- Имя файла
+        filesize [int] -- Размер файла в байтах
+        loaddata [float] -- Время загрузки файла в UNIX-формате
     '''
     with Session(ENGINE) as s_:
         filedata_ = s_.query(File).first()

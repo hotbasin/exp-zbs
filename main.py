@@ -100,7 +100,7 @@ async def get_random_data_t(tk: str):
 async def get_datafile():
     ''' Выдаёт атрибуты последнего удачно загруженного файла с данными
     Returns:
-        [json] -- словарь/json с ключами 'filename', 'filesize', 'loaddate'
+        [json] -- json с ключами 'filename', 'filesize', 'loaddate'
     '''
     return responses.ORJSONResponse(api_.get_datafile())
 

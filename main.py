@@ -128,7 +128,8 @@ async def get_predictions_t(tk: str):
 ##### Временная рокировка эндпоинтов
 @srv.post('/srv1/model/data_upload')
 async def post_bin_upload(file: UploadFile):
-    ''' Пробная загрузка любого файла
+    ''' Загружает любой файл Обновляет данные о загруженном файле в БД в
+    таблице File.
     '''
     with open(e_.CSV_FILE, 'wb') as wb_:
         wb_.write(file.file.read())
@@ -145,7 +146,7 @@ async def post_bin_upload(file: UploadFile):
 ##### @srv.post('/srv1/model/data_upload')
 ##### Временная рокировка эндпоинтов
 @srv.post('/srv1/model/ini_bin_upload')
-async def post_bin_upload(file: UploadFile):
+async def post_model_upload(file: UploadFile):
     ''' Загружает либо готовый файл CSV, либо исходный XLSX, запускает
     обученную модель. Обновляет данные о загруженном файле в БД в
     таблице File. Полученные результаты предсказаний добавлябтся в БД в

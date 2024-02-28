@@ -62,6 +62,10 @@ async def server_root() -> str:
 @srv.post('/srv1/auth/login')
 async def post_login(credentials: Credentials):
     ''' Аутентификация на сервере
+    Returns:
+        [json] -- json с ключами "status", "text", "acc_token",
+            "acc_expired", "ref_token", "ref_expired"
+            или с ключами "status", "text" в случае ошибки
     '''
     return responses.ORJSONResponse(api_.post_login(dict(credentials)))
 

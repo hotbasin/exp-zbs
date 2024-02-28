@@ -42,6 +42,8 @@ class Credentials(BaseModel):
 
 
 class RefreshToken(BaseModel):
+    ''' Класс используется в методе /srv1/auth/refresh
+    '''
     ref_token: str
 
 

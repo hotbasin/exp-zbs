@@ -146,7 +146,10 @@ async def post_bin_upload(file: UploadFile):
 ##### Временная рокировка эндпоинтов
 @srv.post('/srv1/model/ini_bin_upload')
 async def post_bin_upload(file: UploadFile):
-    ''' Загрузка готового файла CSV и запуск обученной модели
+    ''' Загружает либо готовый файл CSV, либо исходный XLSX, запускает
+    обученную модель. Обновляет данные о загруженном файле в БД в
+    таблице File. Полученные результаты предсказаний добавлябтся в БД в
+    таблицу Students.
     '''
     filename_ = file.filename
     filesize_ = file.size

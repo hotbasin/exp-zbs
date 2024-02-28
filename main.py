@@ -35,6 +35,8 @@ srv.add_middleware(
 ''' =====----- Classes -----===== '''
 
 class Credentials(BaseModel):
+    ''' Класс используется в методе /srv1/auth/login
+    '''
     login: str
     password: str
 

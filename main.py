@@ -73,6 +73,9 @@ async def post_login(credentials: Credentials):
 @srv.post('/srv1/auth/refresh')
 async def post_refresh_token(refresh_access: RefreshToken):
     ''' Обновление access-token через refresh-token
+    Returns:
+        [json] -- json с ключами "status", "text", "acc_token",
+            "acc_expired" или с ключами "status", "text" в случае ошибки
     '''
     return responses.ORJSONResponse(api_.post_refresh_token(dict(refresh_access)))
 

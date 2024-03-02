@@ -12,9 +12,6 @@ ENV DB_NAME=project_sql
 ###### COPY ./main.py /BACKEND/main.py
 ###### COPY ./srv_api.py /BACKEND/srv_api.py
 ###### COPY ./requirements.txt /BACKEND/requirements.txt
-###### COPY ./sqlite /BACKEND/sqlite
-###### COPY ./static /BACKEND/static
-###### COPY ./tests /BACKEND/tests
 # COPY ./BACK /BACKEND
 COPY . /BACKEND
 

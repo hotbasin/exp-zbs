@@ -5,6 +5,9 @@ FROM ubuntu:22.04
 ENV APP_PORT=7077
 ENV DB_HOST=127.0.0.1
 ENV DB_PORT=5432
+ENV DB_USER=user1
+ENV DB_PASS=qwerty1
+ENV DB_NAME=project_sql
 
 ###### COPY ./main.py /BACKEND/main.py
 ###### COPY ./srv_api.py /BACKEND/srv_api.py

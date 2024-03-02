@@ -2,6 +2,10 @@ FROM ubuntu:22.04
 ##### FROM python:3.10.13-alpine
 ##### ENV PATH /usr/local/bin:$PATH
 
+ENV APP_PORT=7077
+ENV DB_HOST=127.0.0.1
+ENV DB_PORT=5432
+
 ###### COPY ./main.py /BACKEND/main.py
 ###### COPY ./srv_api.py /BACKEND/srv_api.py
 ###### COPY ./requirements.txt /BACKEND/requirements.txt

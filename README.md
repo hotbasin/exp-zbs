@@ -24,8 +24,8 @@ Backend, DE, DA, ML experiment
 ## Содержание ##
 
 [1. Задание](#задание)    
-[2. TODO](#todo)    
-[3. DONE](#done)    
+[2. DONE](#done)    
+[3. TODO](#todo)    
 [4. Решение](#решение)    
 [5. Результат](#результат)    
 [6. Запуск проекта](#запуск-проекта)    
@@ -45,23 +45,26 @@ backend-часть для приёма данных, обработки и вы�
 
 ----
 
-## TODO ##
+## DONE ##
 
+- Метод POST **`/srv1/auth/login`**
+- Метод POST **`/srv1/auth/refresh`**
+- Метод GET **`/random_data`**
 - Метод GET **`/data-file`**
 - Метод GET **`/predictions`**
-- Метод POST **`/data-file`**
-- Авторизация OAuth2 [как описано в документации](https://fastapi.tiangolo.com/ru/tutorial/security/first-steps/)
-- Переход на PostgreSQL
-- Настройка CI/CD
+- Метод POST **`/srv1/model/ini_bin_download`**
+- SSL-сертификат от Let;s Encrypt. Установка `certbot`
 
 ----
 
-## DONE ##
+## TODO ##
 
-- Метод GET **`/random_data`
-- Метод POST **`/srv1/auth/login`**`
-- Метод POST **`/srv1/model/ini_bin_download`
-- SSL-сертификат от Let;s Encrypt. Установка `certbot`
+- Метод GET **`/srv1/random_data`** с авторизацией
+- Метод GET **`/srv1/data-file`** с авторизацией
+- Метод GET **`/srv1/predictions`** с авторизацией
+- Авторизация OAuth2 [как описано в документации](https://fastapi.tiangolo.com/ru/tutorial/security/first-steps/)
+- Переход на PostgreSQL
+- Настройка CI/CD
 
 ----
 

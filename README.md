@@ -91,19 +91,17 @@ apt update
 отсутствии установить:
 ```bash
 apt install ca-certificates
-            curl
-            gnupg
-            software-properties-common
+apt install curl
+apt install gnupg
+apt install software-properties-common
 ```
 3. Скачать GPG-ключ репозитория Docker:
 ```bash
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
-        gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 ```
 4. Создать `/etc/apt/sources.list.d/docker.list`, в котором:
-```bash
-deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] \
-        https://download/docker.com/linux/ubuntu jammy stable
+```text
+deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download/docker.com/linux/ubuntu jammy stable
 ```
 5. Ещё раз
 ```bash
@@ -116,10 +114,10 @@ apt-cache policy docker-ce
 7. Собственно установка:
 ```bash
 apt install docker-ce
-            docker-ce-cli
-            containerd.io
-            docker-buildx-plugin
-            docker-compose-plugin
+apt install docker-ce-cli
+apt install containerd.io
+apt install docker-buildx-plugin
+apt install docker-compose-plugin
 ```
 8. Проверка:
 ```bash

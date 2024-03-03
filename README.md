@@ -53,16 +53,17 @@ backend-часть для приёма данных, обработки и вы�
 - Метод GET **`/data-file`**
 - Метод GET **`/predictions`**
 - Метод POST **`/srv1/model/ini_bin_download`**
+- Метод POST **`/srv1/model/data_upload`**
 - SSL-сертификат от Let;s Encrypt. Установка `certbot`
 
 ----
 
 ## TODO ##
 
+- Авторизация OAuth2 [как описано в документации](https://fastapi.tiangolo.com/ru/tutorial/security/first-steps/)
 - Метод GET **`/srv1/random_data`** с авторизацией
 - Метод GET **`/srv1/data-file`** с авторизацией
 - Метод GET **`/srv1/predictions`** с авторизацией
-- Авторизация OAuth2 [как описано в документации](https://fastapi.tiangolo.com/ru/tutorial/security/first-steps/)
 - Переход на PostgreSQL
 - Настройка CI/CD
 

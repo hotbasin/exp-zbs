@@ -9,9 +9,9 @@ from os import environ, path
 ROOT_INDEX_FILE = path.join(path.dirname(path.abspath(__file__)),
                             'static/index.html')
 # Файлы сертификатов для SSL/TLS
-ROOT_CERT_FILE = 'certs/ca_certificate.crt'
-HOST_CERT_FILE = 'certs/certificate.crt'
-PRIV_KEY_FILE = 'certs/private.key'
+ROOT_CERT_FILE = 'certs/ca_certificate2.crt'
+HOST_CERT_FILE = 'certs/certificate2.crt'
+PRIV_KEY_FILE = 'certs/private2.key'
 CSV_FILE = 'tests/binary_file.csv'
 ANKETA_FILE_PREFIX = 'ds_model/file_'
 

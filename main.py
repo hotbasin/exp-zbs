@@ -109,6 +109,8 @@ async def get_datafile():
 
 @srv.get('/srv1/data-file')
 async def get_datafile_t(tk: str):
+    ''' Функционал, аналогичный /data-file плюс авторизация
+    '''
     return responses.ORJSONResponse(api_.get_datafile_t(token=tk))
 
 

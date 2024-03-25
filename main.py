@@ -125,6 +125,8 @@ async def get_predictions() -> str:
 
 @srv.get('/srv1/predictions')
 async def get_predictions_t(tk: str):
+    ''' Функционал, аналогичный /predictions плюс авторизация
+    '''
     return responses.ORJSONResponse(api_.get_predictions_t(token=tk))
 
 

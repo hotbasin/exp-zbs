@@ -93,6 +93,8 @@ async def get_random_data() -> str:
 
 @srv.get('/srv1/random_data')
 async def get_random_data_t(tk: str):
+    ''' Функционал, аналогичный /random_data плюс авторизация
+    '''
     return responses.ORJSONResponse(api_.get_random_data_t(token=tk))
 
 

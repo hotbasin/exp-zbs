@@ -45,15 +45,15 @@ backend-часть для приёма данных, обработки и вы�
 
 ## DONE ##
 
-    :arrow_right: Метод POST **`/srv1/auth/login`**
-    :arrow_right: Метод POST **`/srv1/auth/refresh`**
-    :arrow_right: Метод GET **`/random_data`**
-    :arrow_right: Метод GET **`/data-file`**
-    :arrow_right: Метод GET **`/predictions`**
-    :arrow_right: Метод POST **`/srv1/model/ini_bin_download`**
-    :arrow_right: Метод POST **`/srv1/model/data_upload`**
-    :arrow_right: SSL-сертификат от Let;s Encrypt. Установка `certbot`
-    :arrow_right: Возможность загрузки исходного файла формата XLSX
+:arrow_right: Метод POST **`/srv1/auth/login`**
+:arrow_right: Метод POST **`/srv1/auth/refresh`**
+:arrow_right: Метод GET **`/random_data`**
+:arrow_right: Метод GET **`/data-file`**
+:arrow_right: Метод GET **`/predictions`**
+:arrow_right: Метод POST **`/srv1/model/ini_bin_download`**
+:arrow_right: Метод POST **`/srv1/model/data_upload`**
+:arrow_right: SSL-сертификат от Let;s Encrypt. Установка `certbot`
+:arrow_right: Возможность загрузки исходного файла формата XLSX
 
 ----
 

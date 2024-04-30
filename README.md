@@ -48,8 +48,8 @@ backend-часть для приёма данных, обработки и вы�
 ## DONE ##
 
 :arrow_right: Метод POST **`/srv1/auth/login`**    
-:arrow_right: __Метод POST **`/srv1/auth/refresh`**    
-:arrow_right: __Метод GET **`/random_data`**    
+:arrow_right: Метод POST **`/srv1/auth/refresh`**    
+:arrow_right: Метод GET **`/random_data`**    
 :arrow_right: Метод GET **`/data-file`**    
 :arrow_right: Метод GET **`/predictions`**    
 :arrow_right: Метод POST **`/srv1/model/ini_bin_download`**    
